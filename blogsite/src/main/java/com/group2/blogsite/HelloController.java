@@ -11,10 +11,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HelloController {
 
     @GetMapping("/")
-    public String hello(Model model) {
+    public String main(Model model) {
 
-        model.addAttribute("message", "This is something");
+        model.addAttribute("message", "Main Page");
         return "index";
+    }
+
+    @GetMapping("/about")
+    public String about(Model model) {
+
+        model.addAttribute("message", "About Page");
+        return "about";
     }
 
 }
