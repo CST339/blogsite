@@ -1,13 +1,13 @@
-package com.group2.blogsite;
+package com.gcu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BlogsiteApplication {
+public class Milestone339Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BlogsiteApplication.class, args);
+		SpringApplication.run(Milestone339Application.class, args);
 	}
 
 }

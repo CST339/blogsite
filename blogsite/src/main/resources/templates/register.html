@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>About Us</title>
+    <title>Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}" />
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<a class="navbar-brand" th:href="@{/home}">
+	<a class="navbar-brand" th:href="@{/home}">
         <img src="/TeamDevApps.png" alt="Your Logo" width="150" height="150">
     </a>
     <ul class="navbar-nav ml-auto">
@@ -28,9 +28,18 @@
 </nav>
 
 <div class="container mt-4">
-    <h2>About Us</h2>
-    <p>TeamDevsApp Inc.</p>
-    <!-- More about content -->
+    <h2>Register</h2>
+    <form th:action="@{/register}" method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Choose a username" name="username" required style="max-width: 250px;">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Create a password" name="password" required style="max-width: 250px;">
+        </div>
+        <button type="submit" class="btn btn-success">Register</button>
+    </form>
 </div>
 
 <footer class="footer text-center">
@@ -44,3 +53,4 @@
 
 </body>
 </html>
+
