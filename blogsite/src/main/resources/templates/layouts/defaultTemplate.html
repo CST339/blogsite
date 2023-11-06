@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title th:text="${title}">Default Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}" />
+
+    <style>
+        /* Custom CSS for shortening input fields */
+        .form-group {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <!-- Main Navbar -->
+    <div th:replace="layouts/common :: navbar">Navbar</div>
+
+    <!-- Main Body Content -->
+    <section layout:fragment="content" style="margin-bottom:50px; margin-top:90px; min-height: 100vh;">
+        <p>My Body Contents</p>
+    </section>
+
+    <!-- Footer -->
+    <div th:replace="layouts/common :: footer">Footer</div>
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"></script>
+    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+
+</body>

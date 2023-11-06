@@ -1,10 +1,10 @@
-package com.gcu;
+package com.cst339.blogsite;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Milestone339ApplicationTests {
+class BlogsiteApplicationTests {
 
 	@Test
 	void contextLoads() {

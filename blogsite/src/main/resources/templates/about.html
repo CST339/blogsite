@@ -1,46 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>About Us</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}" />
-</head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<a class="navbar-brand" th:href="@{/home}">
-        <img src="/TeamDevApps.png" alt="Your Logo" width="150" height="150">
-    </a>
-    <ul class="navbar-nav ml-auto">
-		<li class="nav-item">
-            <a class="nav-link" href="/home">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/register">Register</a>
-        </li>
-    </ul>
-</nav>
+    <div layout:fragment="content">
+        <div class="container mt-4">
+        <h2>About Us</h2>
+        <p>TeamDevsApp Inc.</p>
+        
+        <hr>
+        <h3>Elias Cruz</h3>
+        <p> I am currently 24 years old and born and raised in Phoenix, AZ. 
+            I have two dogs, one of the is a corgi/lab mixed and a golden/lab mixed. 
+            I am finishing up my bachelors after taking a break and switching my major a couple of time times.</p>
 
-<div class="container mt-4">
-    <h2>About Us</h2>
-    <p>TeamDevsApp Inc.</p>
-    <!-- More about content -->
-</div>
+        <hr>
+        <h3>Scott Maxwell</h3>
+        <p>I currently work doing Software Development, QA, and support. 
+            I hope to work fully as a developer soon.
+            Before GCU, I attended Lambda School also known as BloomTech for Data Science.
+            In my free time, I like to 3D print things, skateboard, and create music. 
+            I also like to follow open source projects like Asahi Linux and Gnome Mobile.</p>
 
-<footer class="footer text-center">
-    <p>&copy; 2023 TeamDevApps Blog. All rights reserved.</p>
-</footer>
+        <hr>
+        <h3>Dioukou Sissoko</h3>
+        <p> I am currently pursuing my degree in Software development with a focus on Cybersecurity. 
+            I love playing basketball and soccer in my free time. 
+            I am currently busy with work and keeping up with school assignments. 
+            I am a tech enthusiast and I enjoy learning anything about advanced tech topics such as robotics and augmented reality. 
+            I am always excited to meet new people.</p>
 
-<!-- Bootstrap JS and dependencies -->
-<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"></script>
-<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"></script>
-<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    </div>
 
 </body>
 </html>
