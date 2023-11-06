@@ -7,48 +7,60 @@
             <h2>Register</h2>
             <form action="#" th:action="@{doRegister}" th:object="${user}" method="post">
                 
+                <!-- Username -->
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input th:field="*{username}" type="text" class="form-control" id="username" placeholder="Choose a username" name="username" required style="max-width: 250px;">
-                    <p style="color:red;" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</p>
-                                            
+                    <p style="color:red;" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</p>              
                 </div>
+
+                <!-- Password -->
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input th:field="*{password}" type="password" class="form-control" id="password" placeholder="Create a password" name="password" required style="max-width: 250px;">
                     <p style="color:red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</p>
                 </div>
+
+                <!-- First Name -->
                 <div class="form-group">
                     <label for="firstName">First Name</label>
                     <input th:field="*{firstName}" type="text" class="form-control" id="firstName" placeholder="Enter First Name" name="firstName" required style="max-width: 250px;">
                     <p style="color:red;" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Error</p>
                 </div>
+
+                <!-- Last Name -->
                 <div class="form-group">
                     <label for="lastName">Last Name</label>
                     <input th:field="*{lastName}" type="text" class="form-control" id="firstName" placeholder="Enter Last Name" name="lastName" required style="max-width: 250px;">
                     <p style="color:red;" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error</p>
                 </div>
+
+                <!-- Email Address -->
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input th:field="*{emailAddress}" type="text" class="form-control" id="email" placeholder="Enter an email" name="email" required style="max-width: 250px;">
                     <p style="color:red;" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}">Error</p>
                 </div>
 
+                <!-- Phone Number -->
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
                     <input th:field="*{phoneNumber}" type="text" class="form-control" id="Phone" placeholder="Enter a Phone Number" name="Phone" required style="max-width: 250px;">
                     <p style="color:red;" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Error</p>
                 </div>
 
+                <!-- Form Submission -->
                 <div style="position:absolute; right:30%;">
                     <input type="submit" class="btn btn-success" style="margin-top:40px;" value="Submit">
                 </div>
                 
 
+                <!-- List of errors -->
                 <div th:if="${#fields.hasErrors('*')}">List of Errors</div>
                 <div th:each="err : ${#fields.errors('*')}">
                     <span style="color:red" th:text="${err}" class="fieldError"></span>
                 </div> 
+
             </form>
         </div>
     </div>

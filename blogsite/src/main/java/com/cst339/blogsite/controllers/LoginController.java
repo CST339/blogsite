@@ -14,9 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.Model;
 
+// Contains mappings for /login, /doLogin, and /logout
 @Controller
 public class LoginController {
 
+    // Creates view for login page
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("user", new User());
@@ -24,6 +26,7 @@ public class LoginController {
         return "login"; // Return login template
     }
 
+    // Signs in user and creates a session
     @PostMapping("/doLogin")
     public String loginSubmit(User user, Model model, HttpServletResponse response) {
 
@@ -33,6 +36,7 @@ public class LoginController {
         return "redirect:/";
     }
 
+    // removes session and returns user to home page
     @GetMapping("/logout")
     public String logout(Model model, HttpServletResponse response) {
 

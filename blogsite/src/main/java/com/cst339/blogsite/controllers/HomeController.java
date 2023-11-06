@@ -12,11 +12,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import com.cst339.blogsite.models.BlogPost;
 
+// Contains mappings for the "", and "/about" webpages
 @Controller
 @RequestMapping("")
 public class HomeController {
 
-    // Home page
+    // Creates view for the Home page (index page)
     @GetMapping("")
     public String index(Model model, HttpServletRequest request) {
 
@@ -52,14 +53,14 @@ public class HomeController {
             model.addAttribute("authenticated", false); // Set authenticated equal to false
         }
 
-        model.addAttribute("title", "DevDiscourse");
+        model.addAttribute("title", "DevDiscourse"); // Modify title of webpage
         return "index";
     }
 
-    // About page
+    // Creates a vew for the about page
     @GetMapping("/about")
     public String about(Model model) {
-        model.addAttribute("title", "About");
+        model.addAttribute("title", "About"); // Modify title of webpage
         return "about";
     }
 }
