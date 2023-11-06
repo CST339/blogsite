@@ -2,17 +2,19 @@ package com.cst339.blogsite.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.validation.BindingResult;
-
-import com.cst339.blogsite.models.User;
-
 import org.springframework.ui.Model;
 
+// Models
+import com.cst339.blogsite.models.User;
+
+// For cookie session
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+
+// For validation
 import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 // Creates mappings for "/register" and "/doRegister"
 @Controller
