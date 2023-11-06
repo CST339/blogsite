@@ -6,14 +6,20 @@
         <div class="container mt-4">
             <h2>Login</h2>
             <form th:action="@{doLogin}" method="post">
+
+                <!-- Username -->
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required style="max-width: 250px;">
                 </div>
+
+                <!-- Password -->
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Password" name="password" required style="max-width: 250px;">
                 </div>
+
+                <!-- Form Submit -->
                 <button type="submit" class="btn btn-primary" style="margin-top:40px;" align="center">Submit</button>
             </form>
         </div>
