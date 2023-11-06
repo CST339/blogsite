@@ -61,7 +61,7 @@ public class LoginController {
         return "redirect:/";
     }
 
-    // Used to manuall validate login
+    // Used to manually validate login
     private void validateLoginFields(User user, BindingResult bindingResult) {
         if (user.getUsername() == null || user.getUsername().isEmpty()) {
             bindingResult.rejectValue("username", "error.username", "Username is required");
