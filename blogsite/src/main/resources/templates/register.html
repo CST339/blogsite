@@ -5,11 +5,13 @@
     <div layout:fragment="content">
         <div class="container mt-4">
             <h2>Register</h2>
-            <form action="#" th:action="@{doRegister}" method="post" th:object="${userModel}" class="">
+            <form action="#" th:action="@{doRegister}" th:object="${user}" method="post">
+                
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input th:field="*{username}" type="text" class="form-control" id="username" placeholder="Choose a username" name="username" required style="max-width: 250px;">
                     <p style="color:red;" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</p>
+                                            
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>

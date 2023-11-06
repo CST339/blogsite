@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 // import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.validation.BindingResult;
 
 import com.cst339.blogsite.models.User;
@@ -15,13 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
+// @RequestMapping("/register")
 public class RegistrationController {
 
     @GetMapping("/register")
     public String registerForm(Model model, User user) {
         model.addAttribute("user", new User());
-        model.addAttribute("title", "register");
-        model.addAttribute("userModel", user);
+        model.addAttribute("title", "Register");
+        model.addAttribute("user", user);
         return "register";
     }
 
@@ -31,9 +33,9 @@ public class RegistrationController {
 
         if (bindingResult.hasErrors()) {
             System.out.println("There are form errors");
-            System.out.println(bindingResult);
             model.addAttribute("userModel", user);
             model.addAttribute("title", "Login Form");
+
             return "register";
         }
         // TODO: Here you would process the registration and add the user to a session.
