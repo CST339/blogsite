@@ -4,6 +4,22 @@
 
 The goal of this project will be to create a blog application that allows users to post a blog and view other postings. The users will have the ability to login and subscribe to other users. Each user will have their own profile page where their blogs are made available. The blogs will also appear on both a giant feed page where all posts are displayed and on a subscribed page where blog posts of subscribed users will appear. Each blog post will have a title, date, and content. When an unlogged in user navigates to any page on the site, they will be directed to the about page where they are prompted to either create an account or login.
 
+## How to Run
+
+1. Run the below command
+
+```
+git clone https://github.com/cst339/blogsite
+```
+
+2. Open the folder in VSCode
+3. Open the `BlogsiteApplication.java` file and select the play icon in the top right of VSCode
+4. Type localhost:8080 into the URL address bar of any web browser on the device
+
+## How to Contribute
+
+It's best to fork the repository and make commmits there to eventually be merged to this repository
+
 ## Site Map
 
 ![image](assets/Sitemap.png)
