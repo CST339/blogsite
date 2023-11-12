@@ -7,7 +7,7 @@
         <h2 th:text="${blogPost.title}">Post Title</h2>
         <h3>by <a th:text="${blogPost.author}" href="#">Author Name</a> on <span th:text="${blogPost.date}">??/??/????</span></h3>
 
-        <p>Post content.</p>
+        <p th:text="${blogPost.content}">Post content.</p>
     </div>
 </div>
 </html>

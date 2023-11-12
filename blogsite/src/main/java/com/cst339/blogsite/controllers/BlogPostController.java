@@ -20,7 +20,9 @@ import com.cst339.blogsite.models.BlogPost;
 public class BlogPostController {
 
     @GetMapping("/createPost")
-    public String createPost(HttpServletRequest request) {
+    public String createPost(Model model, HttpServletRequest request) {
+
+        model.addAttribute("title", "Create a Post");
 
         // Get the request's cookies
         Cookie[] cookies = request.getCookies();
@@ -52,6 +54,8 @@ public class BlogPostController {
 
     @GetMapping("/blog/{id}")
     public String Blog(Model model, HttpServletRequest request, @PathVariable int id) {
+
+        model.addAttribute("title", "Blog Post");
 
         System.out.println("\nblog post id: " + id);
 

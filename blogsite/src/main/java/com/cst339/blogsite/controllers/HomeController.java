@@ -36,8 +36,12 @@ public class HomeController {
 
         if (sessionExists) {
             model.addAttribute("authenticated", true); // Set authenticated equal to true
-            // Create list of blog posts (dummy data)
+
             List<BlogPost> blogposts = new ArrayList<BlogPost>();
+
+            // TODO: Get all blogPosts from database
+
+            // For now Create list of blog posts (dummy data)
             blogposts.add(new BlogPost(1, "Blog Post Title 1", "01/01/2001", "Person 1", "~~"));
             blogposts.add(new BlogPost(2, "Blog Post Title 2", "01/01/2001", "Person 2", "~~"));
             blogposts.add(new BlogPost(3, "Blog Post Title 3", "01/01/2001", "Person 3", "~~"));

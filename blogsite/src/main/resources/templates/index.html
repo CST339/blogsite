@@ -16,7 +16,7 @@
         <div th:if="${authenticated}">
             <h1 align="center">All Blog Posts</h1>
             <div class="row">
-                <div class="col-md-4" th:each="post : ${blogposts}">
+                <div class="col-md-4" th:each="post : ${blogposts}" style="margin-bottom:20px;">
                     <div class="card" style="width: 18rem; padding-bottom: 10px; padding-right: 10px;">
                         <img class="card-img-top" src="/images/post.png" alt="Card image cap">
                         <div class="card-body">
