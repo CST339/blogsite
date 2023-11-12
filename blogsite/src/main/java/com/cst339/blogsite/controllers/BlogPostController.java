@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.cst339.blogsite.models.BlogPost;
 
+/*
+ * Used to create posts
+ */
 @Controller
 public class BlogPostController {
 

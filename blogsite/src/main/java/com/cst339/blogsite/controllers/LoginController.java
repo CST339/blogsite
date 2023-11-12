@@ -14,9 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.Model;
 
+import com.cst339.blogsite.services.LoginService;
+
 // Contains mappings for /login, /doLogin, and /logout
 @Controller
 public class LoginController {
+
+    private LoginService loginService;
 
     // Creates view for login page
     @GetMapping("/login")
@@ -30,10 +34,15 @@ public class LoginController {
     @PostMapping("/doLogin")
     public String loginSubmit(User user, Model model, HttpServletResponse response) {
 
-        Cookie cookie = new Cookie("sess", "0x123");
-        response.addCookie(cookie);
+        // Check credentials - Set cookie if verifyLogin returns true
+        if (loginService.verifyLogin(user.getUsername(), user.getPassword())) {
+            Cookie cookie = new Cookie("sess", "0x123");
+            response.addCookie(cookie);
 
-        return "redirect:/";
+            return "redirect:/";
+        }
+
+        return "redirect:/login";
     }
 
     // removes session and returns user to home page
