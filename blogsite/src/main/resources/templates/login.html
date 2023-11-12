@@ -5,20 +5,18 @@
     
         <div class="container mt-4">
             <h2>Login</h2>
-            <form action="#" th:action="@{doLogin}" th:object="${user}" method="post">
+            <form th:action="@{doLogin}" method="post">
 
                 <!-- Username -->
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required style="max-width: 250px;">
-                    <p style="color:red;" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</p>  
                 </div>
 
                 <!-- Password -->
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Password" name="password" required style="max-width: 250px;">
-                    <p style="color:red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</p>  
                 </div>
 
                 <!-- Form Submit -->

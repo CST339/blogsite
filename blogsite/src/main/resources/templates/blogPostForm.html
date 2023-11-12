@@ -1,0 +1,31 @@
+<!-- blogPostForm.html -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+
+
+
+<div layout:fragment="content" align="center">
+
+    <div class="container mt-4"></div>
+        <h2>Create a Blog Post</h2>
+        <form method="post" action="/savePost">
+
+            <div class="form-group">
+                <label for="title">Blog Post Title:</label>
+                <input type="text" class="form-control" id="title" placeholder="Enter your post title" name="title" required style="min-width: 250px;"></textarea>
+            </div>
+
+         
+            <div class="form-group">
+                <label for="post">Blog Post Content</label>
+                <textarea type="text" class="form-control" id="username" placeholder="Enter your post" name="post" required style="min-width: 400px; min-height:400px;"></textarea>
+            </div>
+      
+
+            <!-- Form Submit -->
+            <button type="submit" class="btn btn-primary" style="margin-top:40px;" align="center">Submit</button>
+
+        </form>
+    </div>
+</div>
+</html>
+
