@@ -6,12 +6,14 @@ package com.cst339.blogsite.models;
  */
 public class BlogPost {
 
+    private int id;
     private String title;
     private String date;
     private String author;
     private String content;
 
-    public BlogPost(String title, String date, String author, String content) {
+    public BlogPost(int id, String title, String date, String author, String content) {
+        this.id = id;
         this.title = title;
         this.date = date;
         this.author = author;
@@ -19,6 +21,10 @@ public class BlogPost {
     }
 
     // getters and setters
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -34,6 +40,10 @@ public class BlogPost {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public String getTitle() {
