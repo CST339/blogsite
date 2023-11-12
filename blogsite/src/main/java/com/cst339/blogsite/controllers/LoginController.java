@@ -1,5 +1,6 @@
 package com.cst339.blogsite.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 // import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,7 @@ import com.cst339.blogsite.services.LoginService;
 @Controller
 public class LoginController {
 
+    @Autowired
     private LoginService loginService;
 
     // Creates view for login page

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -15,11 +16,8 @@ import javax.validation.Valid;
 @Controller
 public class RegistrationController {
 
-    private final RegistrationService registrationService;
-
-    public RegistrationController(RegistrationService registrationService) {
-        this.registrationService = registrationService;
-    }
+    @Autowired
+    private RegistrationService registrationService;
 
     // Creates view for registration page
     @GetMapping("/register")
@@ -33,7 +31,7 @@ public class RegistrationController {
     // Registers user and returns them to the registration page or the home page
     @PostMapping("/doRegister")
     public String registerSubmit(@Valid User user, BindingResult bindingResult, Model model,
-                                HttpServletResponse response) {
+            HttpServletResponse response) {
 
         if (bindingResult.hasErrors()) {
             System.out.println("There are form errors");
