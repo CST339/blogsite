@@ -70,7 +70,12 @@ public class BlogPostController {
 
         if (sessionExists) {
 
-            // Put data here to retrieve blog post data based on id.
+            // TODO: Put data here to retrieve blog post data based on id.
+
+            // For now we will use dummy data
+            BlogPost blogPost = new BlogPost(id, "Blog Post Title 1", "01/01/2001", "Person 1", "Blog Post content");
+
+            model.addAttribute("blogPost", blogPost);
 
             return "blogPost";
         }
