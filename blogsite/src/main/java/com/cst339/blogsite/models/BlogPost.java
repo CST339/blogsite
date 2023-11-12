@@ -1,18 +1,25 @@
 package com.cst339.blogsite.models;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * This is the model for a blog post that captures the title, date, author, and
  * actual content of the blog post
  */
 public class BlogPost {
 
-    private int id;
+    private Integer id;
+
+    @NotNull
     private String title;
+
     private String date;
     private String author;
+
+    @NotNull
     private String content;
 
-    public BlogPost(int id, String title, String date, String author, String content) {
+    public BlogPost(Integer id, String title, String date, String author, String content) {
         this.id = id;
         this.title = title;
         this.date = date;

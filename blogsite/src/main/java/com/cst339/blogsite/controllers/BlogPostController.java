@@ -2,6 +2,7 @@ package com.cst339.blogsite.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,14 +11,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.validation.BindingResult;
+import javax.validation.Valid;
 
 import com.cst339.blogsite.models.BlogPost;
+import com.cst339.blogsite.services.BlogService;
 
 /*
  * Used to create posts
  */
 @Controller
 public class BlogPostController {
+
+    @Autowired
+    public BlogService blogService;
 
     @GetMapping("/createPost")
     public String createPost(Model model, HttpServletRequest request) {
@@ -46,10 +53,20 @@ public class BlogPostController {
     }
 
     @PostMapping("/savePost")
-    public String savePost(@ModelAttribute BlogPost blogPost, HttpServletRequest request) {
+    public String savePost(@Valid BlogPost blogPost, BindingResult bindingResult, HttpServletRequest request) {
 
-        // Save the blog post using your logic (e.g., via service)
+        int result = blogService.saveBlog(blogPost);
+
+        // TODO: if result is 0 redirect to an error page
+        if (result == 0 || bindingResult.hasErrors()) {
+            System.out.println("bindingResult.hasErrors(): " + bindingResult.hasErrors());
+            System.out.println(bindingResult);
+            return "redirect:/createPost";
+        }
+
+        // TODO: Eventually change this to view post just created "/blog/<id>"
         return "redirect:/";
+
     }
 
     @GetMapping("/blog/{id}")
