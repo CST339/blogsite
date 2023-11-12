@@ -38,14 +38,14 @@ public class HomeController {
             model.addAttribute("authenticated", true); // Set authenticated equal to true
             // Create list of blog posts (dummy data)
             List<BlogPost> blogposts = new ArrayList<BlogPost>();
-            blogposts.add(new BlogPost("Blog Post Title 1", "01/01/2001", "Person 1", "~~"));
-            blogposts.add(new BlogPost("Blog Post Title 2", "01/01/2001", "Person 2", "~~"));
-            blogposts.add(new BlogPost("Blog Post Title 3", "01/01/2001", "Person 3", "~~"));
-            blogposts.add(new BlogPost("Blog Post Title 4", "01/01/2001", "Person 4", "~~"));
-            blogposts.add(new BlogPost("Blog Post Title 5", "01/01/2001", "Person 5", "~~"));
-            blogposts.add(new BlogPost("Blog Post Title 6", "01/01/2001", "Person 6", "~~"));
-            blogposts.add(new BlogPost("Blog Post Title 7", "01/01/2001", "Person 7", "~~"));
-            blogposts.add(new BlogPost("Blog Post Title 8", "01/01/2001", "Person 8", "~~"));
+            blogposts.add(new BlogPost(1, "Blog Post Title 1", "01/01/2001", "Person 1", "~~"));
+            blogposts.add(new BlogPost(2, "Blog Post Title 2", "01/01/2001", "Person 2", "~~"));
+            blogposts.add(new BlogPost(3, "Blog Post Title 3", "01/01/2001", "Person 3", "~~"));
+            blogposts.add(new BlogPost(4, "Blog Post Title 4", "01/01/2001", "Person 4", "~~"));
+            blogposts.add(new BlogPost(5, "Blog Post Title 5", "01/01/2001", "Person 5", "~~"));
+            blogposts.add(new BlogPost(6, "Blog Post Title 6", "01/01/2001", "Person 6", "~~"));
+            blogposts.add(new BlogPost(7, "Blog Post Title 7", "01/01/2001", "Person 7", "~~"));
+            blogposts.add(new BlogPost(8, "Blog Post Title 8", "01/01/2001", "Person 8", "~~"));
 
             model.addAttribute("blogposts", blogposts); // Add list of blog post objects to model
 
