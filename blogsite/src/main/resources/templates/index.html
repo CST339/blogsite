@@ -23,7 +23,7 @@
                             <h5 class="card-title" th:text="${post.title}">Card title</h5>
                             <h6 class="card-subtitle mb-2 text-muted" th:text="${post.date}">Date</h6>
                             <p class="card-text" th:text="${post.author}">Author</p>
-                            <a href="#" class="btn btn-secondary">See Post</a>
+                            <a th:href="@{'/blog/' + ${post.id}}" class="btn btn-secondary">See Post</a>
                         </div>
                     </div>
                 </div>

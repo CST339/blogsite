@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -49,8 +50,10 @@ public class BlogPostController {
         return "redirect:/";
     }
 
-    @GetMapping("/blog")
-    public String Blog(Model model, HttpServletRequest request) {
+    @GetMapping("/blog/{id}")
+    public String Blog(Model model, HttpServletRequest request, @PathVariable int id) {
+
+        System.out.println("\nblog post id: " + id);
 
         // Get the request's cookies
         Cookie[] cookies = request.getCookies();
@@ -66,6 +69,9 @@ public class BlogPostController {
         }
 
         if (sessionExists) {
+
+            // Put data here to retrieve blog post data based on id.
+
             return "blogPost";
         }
 
