@@ -10,6 +10,9 @@ import javax.validation.constraints.Size;
  */
 public class User {
 
+    // User ID
+    // Not set until service generates a new ID
+
     // Username
     @NotNull(message = "Username is required")
     private String username;
@@ -42,8 +45,9 @@ public class User {
 
     }
 
-    public User(String username, String password, String firstName, String lastName, String phoneNumber,
+    public User( String username, String password, String firstName, String lastName, String phoneNumber,
             String emailAddress) {
+
         this.username = username;
         this.password = password;
         this.firstName = firstName;
