@@ -20,7 +20,7 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
     
     @Autowired
     private UsersRepository usersRepository;
-    private UserRowMapper userRowMapper;
+    private UserRowMapper userRowMapper = new UserRowMapper();
     @SuppressWarnings("unused")
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;
@@ -53,7 +53,7 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
     // Custom Query method for authentication
     public UserEntity findByUsername(String username){
 
-        String sql =  String.format("SELECT * FROM USERS WHERE USERNAME = '%s'", username);
+        String sql = String.format("SELECT * FROM USERS WHERE USERNAME = '%s'", username);
         
         try{
             List<UserEntity> users = jdbcTemplateObject.query(sql, userRowMapper);
@@ -62,6 +62,8 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
             if(users.isEmpty() != true){
                 UserEntity user = users.get(0);
                 return user;
+            }else{
+                System.out.println("Users is empty");
             }
 
         }catch(Exception e){
