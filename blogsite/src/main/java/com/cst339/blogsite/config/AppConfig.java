@@ -6,6 +6,8 @@ import com.cst339.blogsite.services.LoginService;
 import com.cst339.blogsite.services.LoginServiceImpl;
 import com.cst339.blogsite.services.BlogService;
 import com.cst339.blogsite.services.BlogServiceImpl;
+import com.cst339.blogsite.services.UserService;
+import com.cst339.blogsite.services.UserServiceImpl;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -28,5 +30,10 @@ public class AppConfig {
     @Bean
     BlogService blogService() {
         return new BlogServiceImpl();
+    }
+
+    @Bean
+    UserService userService(){
+        return new UserServiceImpl();
     }
 }
