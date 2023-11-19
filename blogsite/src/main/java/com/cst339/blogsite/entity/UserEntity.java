@@ -74,7 +74,7 @@ public class UserEntity {
     }
 
     public String getLastName(){
-        return this.firstName;
+        return this.lastName;
     }
 
     public void setLastName(String lastName){
