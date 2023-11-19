@@ -4,9 +4,12 @@
 
     <div layout:fragment="content">
         <div class="container mt-4">
-            <h3><span th.text="${user.firstName}">FirstName</span> <span th:text="${user.lastName}">LastName</span></h3>
-            <p>Email Address: <span th.text="${user.emailAddress}">example@email.com</span></p>
-            <p>Phone Number: <span th.text="${user.phoneNumber}">480-441-3943</span></p>
+            <h3>
+                <span th:text="${user.firstName}">FirstName</span> 
+                <span th:text="${user.lastName}">LastName</span>
+            </h3>
+            <p>Email Address: <span th:text="${user.emailAddress}">email</span></p>
+            <p>Phone Number: <span th:text="${user.phoneNumber}">Phone#</span></p>
         </div>        
     </div>
 
