@@ -38,7 +38,7 @@ public class LoginController {
 
         // Check credentials - Set cookie if verifyLogin returns true
         if (loginService.verifyLogin(user.getUsername(), user.getPassword())) {
-            Cookie cookie = new Cookie("sess", "0x123");
+            Cookie cookie = new Cookie("sess", user.getUsername());
             response.addCookie(cookie);
 
             return "redirect:/";

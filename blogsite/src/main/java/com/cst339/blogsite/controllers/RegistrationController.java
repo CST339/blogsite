@@ -44,7 +44,7 @@ public class RegistrationController {
 
         if (isUserRegistered) {
             // Add session logic or cookies here upon successful registration
-            Cookie cookie = new Cookie("sess", "0x123");
+            Cookie cookie = new Cookie("sess", user.getUsername());
             response.addCookie(cookie);
 
             return "redirect:/"; // Redirect to the home page
