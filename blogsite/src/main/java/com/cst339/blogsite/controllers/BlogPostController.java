@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.Cookie;
@@ -117,15 +116,14 @@ public class BlogPostController {
 
         if (sessionExists) {
 
-            // TODO: Put data here to retrieve blog post data based on id.
+            // Retrieve blog post data based on id.
             BlogPost blogPost = blogService.getBlogPostById(id);
 
-
-            // For now we will use dummy data
+            // Dummy Data
             // BlogPost blogPost = new BlogPost(id, "Blog Post Title " + id, "??/??/????", "Person " + id,
             //         "Blog Post content" + id);
 
-            model.addAttribute("blogPost", blogPost);
+            model.addAttribute("blogPost", blogPost); // Add for content on webpage
 
             return "blogPost";
         }

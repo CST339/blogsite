@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
 <body>
-
+    
     <div layout:fragment="content">
-        <div class="container mt-4">
-            <h3>
-                <span th:text="${user.firstName}">FirstName</span> 
-                <span th:text="${user.lastName}">LastName</span>
-            </h3>
-            <p>Email Address: <span th:text="${user.emailAddress}">email</span></p>
-            <p>Phone Number: <span th:text="${user.phoneNumber}">Phone#</span></p>
+
+        <div class="row mt-4">
+
+            <div class="col">
+            </div>
+
+            <div class="col">
+                <img style="width:300px;" src="/images/pfp.png">
+            </div>   
+
+            <div class="col">
+                <h3>
+                    <span th:text="${user.firstName}">FirstName</span> 
+                    <span th:text="${user.lastName}">LastName</span>
+                </h3>
+                <p>Email Address: <span th:text="${user.emailAddress}">email</span></p>
+                <p>Phone Number: <span th:text="${user.phoneNumber}">Phone#</span></p>
+            </div>
+
+            <div class="col">
+            </div>
+
         </div>        
     </div>
 
