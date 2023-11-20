@@ -16,6 +16,11 @@ git clone https://github.com/cst339/blogsite
 3. Open the `BlogsiteApplication.java` file and select the play icon in the top right of VSCode
 4. Type localhost:8080 into the URL address bar of any web browser on the device
 
+## How to setup the database
+
+Run the .dll file in this root directory in MySql Workbench or use MAMP and run it as a SQL query.
+Be sure the ports match in the `application.properties` file.
+
 ## How to Contribute
 
 It's best to fork the repository and make commmits there to eventually be merged to this repository
@@ -23,6 +28,10 @@ It's best to fork the repository and make commmits there to eventually be merged
 ## Site Map
 
 ![image](assets/Sitemap.png)
+
+## ER Diagram
+
+![image](assets/ERDiagram.png)
 
 ## Initial Site Visit Experience (About Page):
 
