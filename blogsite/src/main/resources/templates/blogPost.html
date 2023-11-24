@@ -42,7 +42,21 @@
 
         <div class="container mt-4" th:if="${isAuthor}">
             <button onClick="showEditForm()" class="btn btn-primary">Edit</button>
-            <button onClick="confirmDelete()" class="btn btn-danger">Delete</button>
+
+            <form method="post" style="display: inline-block;" id="delete-form" action="/deletePost" onsubmit="return confirmDelete()">
+
+                <div style="display:none">
+                    <input th:value="${blogPost.title}" type="text" class="form-control" id="title" placeholder="Enter your post title" name="title" required></textarea>
+                </div>
+                <div style="display:none">
+                    <input style="display:none;" th:value="${blogPost.id}" name="id" required id="id" Read-only></input>
+                </div>
+                <div style="display:none">
+                    <textarea th:field="${blogPost.content}" type="text" class="form-control" id="content" placeholder="Enter your post" name="content" required></textarea>
+                </div>
+
+                <button id="delete-button" class="btn btn-danger">Delete</button>
+            </form>
         </div>
 
         <script src="/js/blogPost.js"></script>

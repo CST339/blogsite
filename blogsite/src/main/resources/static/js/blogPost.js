@@ -27,10 +27,7 @@ function hideForm(){
     blogPost.style.display = "block";
 }
 
-// Confirm button pressed
-function confirmDelete(){
+function confirmDelete(event) {
     var result = confirm("Are you sure you want to delete this post? This cannot be undone.")
-    if(result == true){
-
-    }
+    return result;
 }

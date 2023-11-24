@@ -93,7 +93,7 @@ public class BlogPostController {
     }
 
     @GetMapping("/blog/{id}")
-    public String Blog(Model model, HttpServletRequest request, @PathVariable int id) {
+    public String blog(Model model, HttpServletRequest request, @PathVariable int id) {
 
         model.addAttribute("title", "Blog Post");
 
@@ -138,7 +138,7 @@ public class BlogPostController {
     }
 
     @PostMapping("/updatePost")
-    public String Blog(@Valid BlogPost blogPost, BindingResult bindingResult, HttpServletRequest request){
+    public String updateBlog(@Valid BlogPost blogPost, BindingResult bindingResult, HttpServletRequest request){
 
         // Get the request's cookies
         Cookie[] cookies = request.getCookies();
@@ -159,7 +159,6 @@ public class BlogPostController {
         if(sessionExists){
 
             blogPost.setAuthor(username); // TODO - THIS IS NOT SECURE
-            //blogPost.setId(id); // TODO - Get ID
 
             LocalDate currentDate = LocalDate.now();
             blogPost.setDate(currentDate.toString());
@@ -170,12 +169,50 @@ public class BlogPostController {
             if (result == false || bindingResult.hasErrors()) {
                 System.out.println("bindingResult.hasErrors(): " + bindingResult.hasErrors());
                 System.out.println(bindingResult);
-                return "redirect:/createPost";
             }
+  
+            return "redirect:/blog/" + blogPost.getId();
         }
 
         return "redirect:/";
     }
+
+
+    @PostMapping("/deletePost")
+    public String deleteBlog(@Valid BlogPost blogPost, BindingResult bindingResult, HttpServletRequest request){
+
+        // Get the request's cookies
+        Cookie[] cookies = request.getCookies();
+
+        boolean sessionExists = false;
+        String username = null;
+    
+        // TODO - THIS IS NOT SECURE
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("sess".equals(cookie.getName())) {
+                    username = cookie.getValue();
+                    sessionExists = true;
+                }
+            }
+        }
+
+        if(sessionExists){
+
+            blogPost.setAuthor(username); // TODO - THIS IS NOT SECURE
+
+            boolean result = blogService.deleteBlog(blogPost);
+
+            // TODO: if result is 0 redirect to an error page
+            if (result == false || bindingResult.hasErrors()) {
+                System.out.println("bindingResult.hasErrors(): " + bindingResult.hasErrors());
+                System.out.println(bindingResult);
+                return "redirect:/" + blogPost.getId();
+            }
+        }
+
+        return "redirect:/";
+    }   
 
 
 }
