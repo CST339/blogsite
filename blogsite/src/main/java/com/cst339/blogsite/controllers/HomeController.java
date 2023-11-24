@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import com.cst339.blogsite.models.BlogPost;
@@ -38,6 +35,7 @@ public class HomeController {
 
         boolean sessionExists = false;
 
+        // TODO - THIS IS NOT SECURE
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("sess".equals(cookie.getName())) {
@@ -49,23 +47,7 @@ public class HomeController {
         if (sessionExists) {
             model.addAttribute("authenticated", true); // Set authenticated equal to true
 
-            List<BlogPost> blogposts = blogService.findAllBlogPosts();
-
-            // Get all blogPosts from database
-
-
-            // For now Create list of blog posts (dummy data)
-            // blogposts.add(new BlogPost(1, "Blog Post Title 1", "01/01/2001", "Person 1", "~~"));
-            // blogposts.add(new BlogPost(2, "Blog Post Title 2", "01/01/2001", "Person 2", "~~"));
-            // blogposts.add(new BlogPost(3, "Blog Post Title 3", "01/01/2001", "Person 3", "~~"));
-            // blogposts.add(new BlogPost(4, "Blog Post Title 4", "01/01/2001", "Person 4", "~~"));
-            // blogposts.add(new BlogPost(5, "Blog Post Title 5", "01/01/2001", "Person 5", "~~"));
-            // blogposts.add(new BlogPost(6, "Blog Post Title 6", "01/01/2001", "Person 6", "~~"));
-            // blogposts.add(new BlogPost(7, "Blog Post Title 7", "01/01/2001", "Person 7", "~~"));
-            // blogposts.add(new BlogPost(8, "Blog Post Title 8", "01/01/2001", "Person 8", "~~"));
-
-            
-
+            List<BlogPost> blogposts = blogService.findAllBlogPosts(); // Create list of blogposts from returned value of serivce
             model.addAttribute("blogposts", blogposts); // Add list of blog post objects to model
 
         } else {
@@ -89,6 +71,7 @@ public class HomeController {
 
         boolean sessionExists = false;
 
+        // TODO - THIS IS NOT SECURE
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("sess".equals(cookie.getName())) {
@@ -96,18 +79,16 @@ public class HomeController {
                 }
             }
         }
-
+        
         if (sessionExists) {
 
-            User user = userService.getUser(username);
-            
-            model.addAttribute("user", user);
+            User user = userService.getUser(username); // Retrieve user
+            model.addAttribute("user", user); // 
 
             return "profile";
         }
 
         return "redirect:/";
-
     }
 
     // Creates a vew for the about page

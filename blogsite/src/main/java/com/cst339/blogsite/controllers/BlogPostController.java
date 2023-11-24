@@ -1,7 +1,6 @@
 package com.cst339.blogsite.controllers;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,11 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.validation.BindingResult;
 import javax.validation.Valid;
 import java.time.LocalDate;
-
 import com.cst339.blogsite.models.BlogPost;
 import com.cst339.blogsite.services.BlogService;
 
@@ -36,6 +33,7 @@ public class BlogPostController {
 
         boolean sessionExists = false;
 
+        // TODO - THIS IS NOT SECURE
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("sess".equals(cookie.getName())) {
@@ -62,7 +60,7 @@ public class BlogPostController {
         boolean sessionExists = false;
         String username = null;
     
-
+        // TODO - THIS IS NOT SECURE
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("sess".equals(cookie.getName())) {
@@ -74,7 +72,7 @@ public class BlogPostController {
 
         if(sessionExists){
 
-            blogPost.setAuthor(username); // TODO - FIX 
+            blogPost.setAuthor(username); // TODO - THIS IS NOT SECURE
 
             LocalDate currentDate = LocalDate.now();
             blogPost.setDate(currentDate.toString());
@@ -102,14 +100,15 @@ public class BlogPostController {
         System.out.println("\nblog post id: " + id);
 
         // Get the request's cookies
+        String username = null;
         Cookie[] cookies = request.getCookies();
-
         boolean sessionExists = false;
 
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("sess".equals(cookie.getName())) {
                     sessionExists = true;
+                    username = cookie.getValue();
                 }
             }
         }
@@ -118,17 +117,65 @@ public class BlogPostController {
 
             // Retrieve blog post data based on id.
             BlogPost blogPost = blogService.getBlogPostById(id);
-
-            // Dummy Data
-            // BlogPost blogPost = new BlogPost(id, "Blog Post Title " + id, "??/??/????", "Person " + id,
-            //         "Blog Post content" + id);
-
             model.addAttribute("blogPost", blogPost); // Add for content on webpage
+
+            System.out.println("Session val: " +  username);
+            System.out.println("Blog author val: " +  blogPost.getAuthor());
+            System.out.println(blogPost.getId());
+
+            if(username != null && username.equals(blogPost.getAuthor())){
+                model.addAttribute("isAuthor", true);
+                System.out.println("Is author = true");
+            }else{
+                model.addAttribute("isAuthor", false);
+                System.out.println("Is not Authior");
+            }
 
             return "blogPost";
         }
 
         return "redirect:/";
-
     }
+
+    @PostMapping("/updatePost")
+    public String Blog(@Valid BlogPost blogPost, BindingResult bindingResult, HttpServletRequest request){
+
+        // Get the request's cookies
+        Cookie[] cookies = request.getCookies();
+
+        boolean sessionExists = false;
+        String username = null;
+    
+        // TODO - THIS IS NOT SECURE
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("sess".equals(cookie.getName())) {
+                    username = cookie.getValue();
+                    sessionExists = true;
+                }
+            }
+        }
+
+        if(sessionExists){
+
+            blogPost.setAuthor(username); // TODO - THIS IS NOT SECURE
+            //blogPost.setId(id); // TODO - Get ID
+
+            LocalDate currentDate = LocalDate.now();
+            blogPost.setDate(currentDate.toString());
+
+            boolean result = blogService.updateBlog(blogPost);
+
+            // TODO: if result is 0 redirect to an error page
+            if (result == false || bindingResult.hasErrors()) {
+                System.out.println("bindingResult.hasErrors(): " + bindingResult.hasErrors());
+                System.out.println(bindingResult);
+                return "redirect:/createPost";
+            }
+        }
+
+        return "redirect:/";
+    }
+
+
 }

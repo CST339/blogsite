@@ -8,7 +8,6 @@ import com.cst339.blogsite.services.BlogService;
 import com.cst339.blogsite.services.BlogServiceImpl;
 import com.cst339.blogsite.services.UserService;
 import com.cst339.blogsite.services.UserServiceImpl;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

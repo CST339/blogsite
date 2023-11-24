@@ -3,18 +3,12 @@ package com.cst339.blogsite.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.cst339.blogsite.models.User;
-
-// For saving cookies
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.ui.Model;
-
 import com.cst339.blogsite.services.LoginService;
 
 // Contains mappings for /login, /doLogin, and /logout
@@ -26,15 +20,17 @@ public class LoginController {
 
     // Creates view for login page
     @GetMapping("/login")
-    public String login(Model model) {
+    public String login(Model model, User user) {
         model.addAttribute("user", new User());
         model.addAttribute("title", "Login");
+        model.addAttribute("user", user);
+        model.addAttribute("err", "");
         return "login"; // Return login template
     }
 
     // Signs in user and creates a session
     @PostMapping("/doLogin")
-    public String loginSubmit(User user, Model model, HttpServletResponse response) {
+    public String loginSubmit(User user, Model model, BindingResult bindingResult, HttpServletResponse response) {
 
         // Check credentials - Set cookie if verifyLogin returns true
         if (loginService.verifyLogin(user.getUsername(), user.getPassword())) {
@@ -44,7 +40,9 @@ public class LoginController {
             return "redirect:/";
         }
 
-        return "redirect:/login";
+        model.addAttribute("err", "Username or Password Incorrect");
+
+        return "login";
     }
 
     // removes session and returns user to home page

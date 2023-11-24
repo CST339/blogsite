@@ -4,11 +4,52 @@
 <div layout:fragment="content" align="center">
 
     <div class="container mt-4"></div>
-        <h2 th:text="${blogPost.title}">Post Title</h2>
-        <h3>by <a th:href="@{'/profile/' + ${blogPost.author}}" th:text="${blogPost.author}">Author Name</a> on <span th:text="${blogPost.date}">??/??/????</span></h3>
 
-        <p th:text="${blogPost.content}">Post content.</p>
+        <div id="blog-post">
+
+            <h2 th:text="${blogPost.title}">Post Title</h2>
+            <h3>by <a th:href="@{'/profile/' + ${blogPost.author}}" th:text="${blogPost.author}">Author Name</a> on <span th:text="${blogPost.date}">??/??/????</span></h3>
+
+            <p style="max-width: 70vb;" th:text="${blogPost.content}">Post content.</p>
+
+        </div>
+
+        <form th:if="${isAuthor}" id="editForm" method="post" style="display: none;" action="/updatePost">
+
+
+            <div class="form-group">
+                <label for="title">Blog Post Title:</label>
+                <input th:value="${blogPost.title}" type="text" class="form-control" id="title" placeholder="Enter your post title" name="title" required></textarea>
+            </div>
+
+            <div>
+                <input style="display:none;" th:value="${blogPost.id}" name="id" required id="id" Read-only></input>
+            </div>
+
+         
+            <div style="max-width:800px;">
+                <label for="post">Blog Post Content</label>
+                <textarea th:field="${blogPost.content}" type="text" class="form-control" id="content" placeholder="Enter your post" name="content" required></textarea>
+            </div>
+      
+            <!-- Form Submit -->
+            <button type="submit" class="btn btn-primary" style="margin-top:40px;" align="center">Confirm Changes</button>
+
+            <!-- Cancel -->
+            <button type="button" onClick="hideForm()" class="btn btn-secondary" style="margin-top:40px;" align="center">Cancel</button>
+
+        </form>
+
+        <div class="container mt-4" th:if="${isAuthor}">
+            <button onClick="showEditForm()" class="btn btn-primary">Edit</button>
+            <button onClick="confirmDelete()" class="btn btn-danger">Delete</button>
+        </div>
+
+        <script src="/js/blogPost.js"></script>
+
     </div>
+
 </div>
+
 </html>
 

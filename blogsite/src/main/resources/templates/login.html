@@ -5,7 +5,7 @@
     
         <div class="container mt-4">
             <h2>Login</h2>
-            <form th:action="@{doLogin}" method="post">
+            <form action="#" th:action="@{doLogin}" th:object="${user}" method="post">
 
                 <!-- Username -->
                 <div class="form-group">
@@ -21,6 +21,14 @@
 
                 <!-- Form Submit -->
                 <button type="submit" class="btn btn-primary" style="margin-top:40px;" align="center">Submit</button>
+
+                
+                <div style="margin-top:100px;" th:if="${err ne ''}" class="alert alert-danger">
+                    <span th:text="${err}"></span>
+                </div>
+
+
+
             </form>
         </div>
     </div>

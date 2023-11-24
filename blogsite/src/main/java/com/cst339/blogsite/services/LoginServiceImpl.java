@@ -17,15 +17,11 @@ public class LoginServiceImpl implements LoginService {
         UserEntity user = service.findByUsername(username);
         System.out.println(user);
 
-        System.out.println("DB Password: " + user.getPassword());
-        System.out.println("Entered Password: " + password);
-
         // TODO - Add encryption step for entered password to compare for encrypted db password
-       
-        if(user.getPassword().equals(password)){
-            return true;
-        }
-        
+       if(user != null && (user.getPassword().equals(password)) ){
+            return true;        
+       }
+
         return false;
     }
 

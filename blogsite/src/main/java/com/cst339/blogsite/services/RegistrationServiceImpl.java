@@ -1,7 +1,5 @@
 package com.cst339.blogsite.services;
 
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-
 import com.cst339.blogsite.entity.UserEntity;
 import com.cst339.blogsite.models.User;
 import com.cst339.blogsite.data.UserDataService;
@@ -14,7 +12,6 @@ public class RegistrationServiceImpl implements RegistrationService {
     
     @Override
     public boolean registerUser(User user) {
-        
         
         // Logic to register the user, interacting with repositories or databases
         UserEntity userEntity = new UserEntity(null, user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getEmailAddress());

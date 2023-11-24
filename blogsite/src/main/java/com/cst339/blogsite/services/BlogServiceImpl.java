@@ -34,7 +34,7 @@ public class BlogServiceImpl implements BlogService {
         
         BlogPostEntity blogEntity = blogDataService.findById(id);
 
-        BlogPost blogPost = new BlogPost(null, blogEntity.getTitle(), blogEntity.getDate(), blogEntity.getAuthor(), blogEntity.getContent());
+        BlogPost blogPost = new BlogPost(id, blogEntity.getTitle(), blogEntity.getDate(), blogEntity.getAuthor(), blogEntity.getContent());
 
         return blogPost;
     }
@@ -54,8 +54,25 @@ public class BlogServiceImpl implements BlogService {
     // Deletes blog from database
     public boolean deleteBlog(BlogPost post) {
 
-        // TODO: add logic delete blog post from database
+        // cast Id to LONG
+        Long longId = (long) post.getId();
 
-        return true; // Return true if deleted blog post
+        BlogPostEntity blogPostEntity = new BlogPostEntity(longId, post.getTitle(), post.getDate(), post.getAuthor(), post.getContent());
+        boolean result = blogDataService.delete(blogPostEntity);
+
+        return result; // Return true if deleted blog post
     }
+
+    // Deletes blog from database
+    public boolean updateBlog(BlogPost post) {
+
+        // cast Id to LONG
+        Long longId = (long) post.getId();
+
+        BlogPostEntity blogPostEntity = new BlogPostEntity(longId, post.getTitle(), post.getDate(), post.getAuthor(), post.getContent());
+        boolean result = blogDataService.update(blogPostEntity);
+
+        return result; // Return true if deleted blog post
+    }
+
 }

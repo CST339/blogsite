@@ -3,14 +3,10 @@ package com.cst339.blogsite.data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-
 import com.cst339.blogsite.data.mapper.BlogRowMapper;
 import com.cst339.blogsite.entity.BlogPostEntity;
 import com.cst339.blogsite.data.repository.BlogPostRepository;
@@ -102,11 +98,26 @@ public class BlogDataService implements DataAccessInterface<BlogPostEntity>{
     }
 
      public boolean update(BlogPostEntity blog){
+
+        try{
+            this.blogPostRepository.save(blog);
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
         return true;
     }   
 
     @Override
     public boolean delete(BlogPostEntity blog){
+        try{
+            this.blogPostRepository.deleteById(blog.getId());
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
         return true;
     }
 

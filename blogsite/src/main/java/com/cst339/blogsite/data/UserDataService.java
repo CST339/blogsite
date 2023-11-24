@@ -3,14 +3,10 @@ package com.cst339.blogsite.data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-
 import com.cst339.blogsite.data.mapper.UserRowMapper;
 import com.cst339.blogsite.entity.UserEntity;
 import com.cst339.blogsite.data.repository.UsersRepository;;
@@ -63,7 +59,7 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
                 UserEntity user = users.get(0);
                 return user;
             }else{
-                System.out.println("Users is empty");
+                System.out.println("No users found");
             }
 
         }catch(Exception e){

@@ -13,4 +13,7 @@ public interface BlogService {
 
     // Used to delete blog from database
     public boolean deleteBlog(BlogPost post);
+
+    // Used to delete blog from database
+    public boolean updateBlog(BlogPost post);    
 }
