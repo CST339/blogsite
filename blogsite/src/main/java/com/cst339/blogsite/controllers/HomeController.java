@@ -93,8 +93,27 @@ public class HomeController {
 
     // Creates a vew for the about page
     @GetMapping("/about")
-    public String about(Model model) {
-        model.addAttribute("title", "About"); // Modify title of webpage
-        return "about";
+    public String about(Model model, HttpServletRequest request) {
+
+        // Get the request's cookies
+        Cookie[] cookies = request.getCookies();
+
+        boolean sessionExists = false;
+
+        // TODO - THIS IS NOT SECURE
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("sess".equals(cookie.getName())) {
+                    sessionExists = true;
+                }
+            }
+        }
+
+        if(sessionExists){
+            model.addAttribute("title", "About"); // Modify title of webpage
+            return "about";
+        }
+
+        return "redirect:/";
     }
 }
