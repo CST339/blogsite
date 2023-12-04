@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 /**
  * This is the model for a User who registers on the site
  */
-public class User {
+public class UserModel {
 
     // User ID
     // Not set until service generates a new ID
@@ -41,11 +41,11 @@ public class User {
     @Email(message = "Invalid email address format")
     private String emailAddress;
 
-    public User() {
+    public UserModel() {
 
     }
 
-    public User( String username, String password, String firstName, String lastName, String phoneNumber,
+    public UserModel( String username, String password, String firstName, String lastName, String phoneNumber,
             String emailAddress) {
 
         this.username = username;

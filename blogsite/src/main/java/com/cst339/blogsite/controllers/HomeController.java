@@ -10,9 +10,10 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import com.cst339.blogsite.models.BlogPost;
-import com.cst339.blogsite.models.User;
+import com.cst339.blogsite.models.UserModel;
 import com.cst339.blogsite.services.UserService;
 import com.cst339.blogsite.services.BlogService;
+import com.cst339.blogsite.services.AuthenticationService;
 
 // Contains mappings for the "", and "/about" webpages
 @Controller
@@ -26,23 +27,19 @@ public class HomeController {
     @Autowired
     private BlogService blogService;
 
+    @Autowired
+    private AuthenticationService authService;
+
     // Creates view for the Home page (index page)
     @GetMapping("")
     public String index(Model model, HttpServletRequest request) {
 
         // Get the request's cookies
-        Cookie[] cookies = request.getCookies();
+        //Cookie[] cookies = request.getCookies();
 
         boolean sessionExists = false;
 
-        // TODO - THIS IS NOT SECURE
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("sess".equals(cookie.getName())) {
-                    sessionExists = true;
-                }
-            }
-        }
+        sessionExists = authService.isAuthenticated();
 
         if (sessionExists) {
             model.addAttribute("authenticated", true); // Set authenticated equal to true
@@ -82,7 +79,7 @@ public class HomeController {
         
         if (sessionExists) {
 
-            User user = userService.getUser(username); // Retrieve user
+            UserModel user = userService.getUser(username); // Retrieve user
             model.addAttribute("user", user); // 
 
             return "profile";

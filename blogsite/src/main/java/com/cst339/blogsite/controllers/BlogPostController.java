@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import com.cst339.blogsite.models.BlogPost;
 import com.cst339.blogsite.services.BlogService;
+import com.cst339.blogsite.services.AuthenticationService;
 
 /*
  * Used to create posts
@@ -23,24 +24,17 @@ public class BlogPostController {
     @Autowired
     public BlogService blogService;
 
+    @Autowired
+    AuthenticationService authService;
+
     @GetMapping("/createPost")
     public String createPost(Model model, HttpServletRequest request) {
 
         model.addAttribute("title", "Create a Post");
 
-        // Get the request's cookies
-        Cookie[] cookies = request.getCookies();
-
         boolean sessionExists = false;
 
-        // TODO - THIS IS NOT SECURE
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("sess".equals(cookie.getName())) {
-                    sessionExists = true;
-                }
-            }
-        }
+        sessionExists = authService.isAuthenticated();
 
         // Take unregistered user to login to page
         if (!sessionExists) {
@@ -53,33 +47,27 @@ public class BlogPostController {
     @PostMapping("/savePost")
     public String savePost(@Valid BlogPost blogPost, BindingResult bindingResult, HttpServletRequest request) {
 
-
-        // Get the request's cookies
-        Cookie[] cookies = request.getCookies();
+        System.out.println("savePost");
 
         boolean sessionExists = false;
         String username = null;
-    
-        // TODO - THIS IS NOT SECURE
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("sess".equals(cookie.getName())) {
-                    username = cookie.getValue();
-                    sessionExists = true;
-                }
-            }
-        }
+
+        sessionExists = authService.isAuthenticated();
+        username = authService.getUsername();
+
+         System.out.println("username: " + username);
+         System.out.println("blogPost.getAuthor(): " + blogPost.getAuthor());
 
         if(sessionExists){
 
-            blogPost.setAuthor(username); // TODO - THIS IS NOT SECURE
+            blogPost.setAuthor(username);
 
             LocalDate currentDate = LocalDate.now();
             blogPost.setDate(currentDate.toString());
 
             boolean result = blogService.saveBlog(blogPost);
+            System.out.println("result " + result);
 
-            // TODO: if result is 0 redirect to an error page
             if (result == false || bindingResult.hasErrors()) {
                 System.out.println("bindingResult.hasErrors(): " + bindingResult.hasErrors());
                 System.out.println(bindingResult);
@@ -101,19 +89,13 @@ public class BlogPostController {
 
         // Get the request's cookies
         String username = null;
-        Cookie[] cookies = request.getCookies();
         boolean sessionExists = false;
 
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("sess".equals(cookie.getName())) {
-                    sessionExists = true;
-                    username = cookie.getValue();
-                }
-            }
-        }
+        sessionExists = authService.isAuthenticated();
 
         if (sessionExists) {
+
+            username = authService.getUsername();
 
             // Retrieve blog post data based on id.
             BlogPost blogPost = blogService.getBlogPostById(id);
@@ -140,25 +122,16 @@ public class BlogPostController {
     @PostMapping("/updatePost")
     public String updateBlog(@Valid BlogPost blogPost, BindingResult bindingResult, HttpServletRequest request){
 
-        // Get the request's cookies
-        Cookie[] cookies = request.getCookies();
-
         boolean sessionExists = false;
         String username = null;
-    
-        // TODO - THIS IS NOT SECURE
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("sess".equals(cookie.getName())) {
-                    username = cookie.getValue();
-                    sessionExists = true;
-                }
-            }
-        }
 
-        if(sessionExists){
+        sessionExists = authService.isAuthenticated();
+        username = authService.getUsername();
 
-            blogPost.setAuthor(username); // TODO - THIS IS NOT SECURE
+        BlogPost blog = blogService.getBlogPostById(blogPost.getId());
+        if(sessionExists && username.equals(blog.getAuthor()) ){
+
+            blogPost.setAuthor(username);
 
             LocalDate currentDate = LocalDate.now();
             blogPost.setDate(currentDate.toString());
@@ -181,25 +154,16 @@ public class BlogPostController {
     @PostMapping("/deletePost")
     public String deleteBlog(@Valid BlogPost blogPost, BindingResult bindingResult, HttpServletRequest request){
 
-        // Get the request's cookies
-        Cookie[] cookies = request.getCookies();
-
         boolean sessionExists = false;
         String username = null;
-    
-        // TODO - THIS IS NOT SECURE
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("sess".equals(cookie.getName())) {
-                    username = cookie.getValue();
-                    sessionExists = true;
-                }
-            }
-        }
+        
+        sessionExists = authService.isAuthenticated();
+        username = authService.getUsername();
 
-        if(sessionExists){
+        BlogPost blog = blogService.getBlogPostById(blogPost.getId());
+        if(sessionExists && username.equals(blog.getAuthor()) ){
 
-            blogPost.setAuthor(username); // TODO - THIS IS NOT SECURE
+            blogPost.setAuthor(username);
 
             boolean result = blogService.deleteBlog(blogPost);
 

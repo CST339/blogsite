@@ -1,6 +1,6 @@
 package com.cst339.blogsite.controllers;
 
-import com.cst339.blogsite.models.User;
+import com.cst339.blogsite.models.UserModel;
 import com.cst339.blogsite.services.RegistrationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -20,8 +22,8 @@ public class RegistrationController {
 
     // Creates view for registration page
     @GetMapping("/register")
-    public String registerForm(Model model, User user) {
-        model.addAttribute("user", new User());
+    public String registerForm(Model model, UserModel user) {
+        model.addAttribute("user", new UserModel());
         model.addAttribute("title", "Register"); // Modify title of webpage
         model.addAttribute("user", user);
         return "register";
@@ -29,7 +31,7 @@ public class RegistrationController {
 
     // Registers user and returns them to the registration page or the home page
     @PostMapping("/doRegister")
-    public String registerSubmit(@Valid User user, BindingResult bindingResult, Model model,
+    public String registerSubmit(@Valid UserModel user, BindingResult bindingResult, Model model,
             HttpServletResponse response) {
 
         if (bindingResult.hasErrors()) {
@@ -38,6 +40,11 @@ public class RegistrationController {
             model.addAttribute("title", "Login Form"); // Modify title of webpage
             return "register";
         }
+
+        // Encrypt password
+        String encoded = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(encoded);
+
         // Here, use the injected service to handle user registration
         boolean isUserRegistered = registrationService.registerUser(user);
 

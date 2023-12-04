@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
-import com.cst339.blogsite.models.User;
+import com.cst339.blogsite.models.UserModel;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.ui.Model;
@@ -20,8 +20,8 @@ public class LoginController {
 
     // Creates view for login page
     @GetMapping("/login")
-    public String login(Model model, User user) {
-        model.addAttribute("user", new User());
+    public String login(Model model, UserModel user) {
+        model.addAttribute("user", new UserModel());
         model.addAttribute("title", "Login");
         model.addAttribute("user", user);
         model.addAttribute("err", "");
@@ -30,7 +30,7 @@ public class LoginController {
 
     // Signs in user and creates a session
     @PostMapping("/doLogin")
-    public String loginSubmit(User user, Model model, BindingResult bindingResult, HttpServletResponse response) {
+    public String loginSubmit(UserModel user, Model model, BindingResult bindingResult, HttpServletResponse response) {
 
         // Check credentials - Set cookie if verifyLogin returns true
         if (loginService.verifyLogin(user.getUsername(), user.getPassword())) {
@@ -54,6 +54,6 @@ public class LoginController {
         cookie.setMaxAge(0); // Set the maximum age to 0 to immediately expire the cookie
         response.addCookie(cookie); // Add the modified cookie to the response
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 }

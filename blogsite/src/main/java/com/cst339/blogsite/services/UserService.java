@@ -1,7 +1,7 @@
 package com.cst339.blogsite.services;
 
-import com.cst339.blogsite.models.User;
+import com.cst339.blogsite.models.UserModel;
 
 public interface UserService {
-    public User getUser(String username);
+    public UserModel getUser(String username);
 }
