@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import groovyjarjarantlr.collections.List;
+
 @Table(name="USERS")
 public class UserEntity {
     

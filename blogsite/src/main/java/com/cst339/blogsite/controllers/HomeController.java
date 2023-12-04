@@ -68,21 +68,18 @@ public class HomeController {
 
         boolean sessionExists = false;
 
-        // TODO - THIS IS NOT SECURE
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("sess".equals(cookie.getName())) {
-                    sessionExists = true;
-                }
-            }
-        }
+        sessionExists = authService.isAuthenticated();
         
         if (sessionExists) {
+
+            model.addAttribute("authenticated", true);
 
             UserModel user = userService.getUser(username); // Retrieve user
             model.addAttribute("user", user); // 
 
             return "profile";
+        }else{
+            model.addAttribute("authenticated", false);
         }
 
         return "redirect:/";
@@ -92,23 +89,16 @@ public class HomeController {
     @GetMapping("/about")
     public String about(Model model, HttpServletRequest request) {
 
-        // Get the request's cookies
-        Cookie[] cookies = request.getCookies();
-
         boolean sessionExists = false;
-
-        // TODO - THIS IS NOT SECURE
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("sess".equals(cookie.getName())) {
-                    sessionExists = true;
-                }
-            }
-        }
+        sessionExists = authService.isAuthenticated();
+        
 
         if(sessionExists){
             model.addAttribute("title", "About"); // Modify title of webpage
+            model.addAttribute("authenticated", true);
             return "about";
+        }else{
+            model.addAttribute("authenticated", false);
         }
 
         return "redirect:/";

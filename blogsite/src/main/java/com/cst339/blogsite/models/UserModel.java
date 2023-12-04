@@ -5,6 +5,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * This is the model for a User who registers on the site
  */
@@ -41,6 +44,9 @@ public class UserModel {
     @Email(message = "Invalid email address format")
     private String emailAddress;
 
+    // A list of Usernames
+    // private List<String> subscriptions;
+
     public UserModel() {
 
     }
@@ -54,6 +60,9 @@ public class UserModel {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
+
+        // Initialize
+        // this.subscriptions = new ArrayList<String>();
     }
 
     // getters and setters
@@ -105,5 +114,13 @@ public class UserModel {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
+
+    // public List<String> getSubscriptions(){
+    //     return this.subscriptions;
+    // }
+
+    // public void setSubscriptions(List<String> subscriptions){
+    //     this.subscriptions = subscriptions;
+    // }
 
 }

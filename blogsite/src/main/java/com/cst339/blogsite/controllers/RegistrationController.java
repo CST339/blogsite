@@ -26,6 +26,7 @@ public class RegistrationController {
         model.addAttribute("user", new UserModel());
         model.addAttribute("title", "Register"); // Modify title of webpage
         model.addAttribute("user", user);
+        model.addAttribute("authenticated", false);
         return "register";
     }
 
