@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cst339.blogsite.models.BlogPost;
-import com.cst339.blogsite.models.UserModel;
 import com.cst339.blogsite.services.BlogService;
 import org.springframework.web.bind.annotation.RequestParam;
 
