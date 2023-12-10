@@ -39,7 +39,6 @@ public class BlogsRestAPI {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
 
     // Method to get one blog post (based on ID)
     @GetMapping(path="/blogpost")
