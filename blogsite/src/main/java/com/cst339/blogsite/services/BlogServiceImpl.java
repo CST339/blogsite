@@ -34,9 +34,14 @@ public class BlogServiceImpl implements BlogService {
         
         BlogPostEntity blogEntity = blogDataService.findById(id);
 
-        BlogPost blogPost = new BlogPost(id, blogEntity.getTitle(), blogEntity.getDate(), blogEntity.getAuthor(), blogEntity.getContent());
+        if(blogEntity != null){
+            BlogPost blogPost = new BlogPost(id, blogEntity.getTitle(), blogEntity.getDate(), blogEntity.getAuthor(), blogEntity.getContent());
 
-        return blogPost;
+            return blogPost;
+        
+        }else{
+            return null;
+        }
     }
 
     // Saves blog to database
