@@ -21,6 +21,10 @@ public class SubscriptionServiceImpl implements SubscriptionSerivce{
 
         List<SubscriptionModel> subscriptions = new ArrayList<SubscriptionModel>();
 
+        if(subscriptionsEntities == null){
+            return subscriptions;
+        }
+
         for(SubscriptionEntity entity: subscriptionsEntities){
             subscriptions.add(new SubscriptionModel(entity.getId(), entity.getSubscribedUserId(), entity.getUserId() ));
         }
