@@ -1,13 +1,12 @@
 package com.cst339.blogsite.controllers;
 
-import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-// import javax.servlet.http.Cookie;
 import org.springframework.validation.BindingResult;
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -28,7 +27,7 @@ public class BlogPostController {
     AuthenticationService authService;
 
     @GetMapping("/createPost")
-    public String createPost(Model model, HttpServletRequest request) {
+    public String createPost(Model model) {
 
         model.addAttribute("title", "Create a Post");
 
@@ -50,7 +49,7 @@ public class BlogPostController {
     }
 
     @PostMapping("/savePost")
-    public String savePost(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult, HttpServletRequest request) {
+    public String savePost(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult) {
 
 
         boolean sessionExists = false;
@@ -84,7 +83,7 @@ public class BlogPostController {
     }
 
     @GetMapping("/blog/{id}")
-    public String blog(Model model, HttpServletRequest request, @PathVariable int id) {
+    public String blog(Model model, @PathVariable int id) {
 
         model.addAttribute("title", "Blog Post");
 
@@ -126,7 +125,7 @@ public class BlogPostController {
     }
 
     @PostMapping("/updatePost")
-    public String updateBlog(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult, HttpServletRequest request){
+    public String updateBlog(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult){
 
         boolean sessionExists = false;
         String username = null;
@@ -146,7 +145,6 @@ public class BlogPostController {
 
             boolean result = blogService.updateBlog(blogPost);
 
-            // TODO: if result is 0 redirect to an error page
             if (result == false || bindingResult.hasErrors()) {
                 System.out.println("bindingResult.hasErrors(): " + bindingResult.hasErrors());
                 System.out.println(bindingResult);
@@ -160,7 +158,7 @@ public class BlogPostController {
 
 
     @PostMapping("/deletePost")
-    public String deleteBlog(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult, HttpServletRequest request){
+    public String deleteBlog(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult){
 
         boolean sessionExists = false;
         String username = null;

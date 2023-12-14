@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -32,8 +29,7 @@ public class RegistrationController {
 
     // Registers user and returns them to the registration page or the home page
     @PostMapping("/doRegister")
-    public String registerSubmit(@Valid UserModel user, BindingResult bindingResult, Model model,
-            HttpServletResponse response) {
+    public String registerSubmit(@Valid UserModel user, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             System.out.println("There are form errors");
@@ -50,10 +46,6 @@ public class RegistrationController {
         boolean isUserRegistered = registrationService.registerUser(user);
 
         if (isUserRegistered) {
-            // Add session logic or cookies here upon successful registration
-            Cookie cookie = new Cookie("sess", user.getUsername());
-            response.addCookie(cookie);
-
             return "redirect:/"; // Redirect to the home page
         } else {
             // Handle registration failure

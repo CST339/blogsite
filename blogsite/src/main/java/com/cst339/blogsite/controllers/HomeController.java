@@ -10,7 +10,6 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
 import com.cst339.blogsite.models.BlogPostModel;
 import com.cst339.blogsite.models.UserModel;
 import com.cst339.blogsite.models.SubscriptionModel;
@@ -19,7 +18,6 @@ import com.cst339.blogsite.services.BlogService;
 import com.cst339.blogsite.services.AuthenticationService;
 import com.cst339.blogsite.services.SubscriptionSerivce;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 // Contains mappings for the "", and "/about" webpages
@@ -42,7 +40,7 @@ public class HomeController {
 
     // Creates view for the Home page (index page)
     @GetMapping("")
-    public String index(Model model, HttpServletRequest request) {
+    public String index(Model model) {
 
         boolean sessionExists = false;
 
@@ -66,7 +64,7 @@ public class HomeController {
 
 
     @GetMapping("/subscriptions")
-    public String subscription(Model model, HttpServletRequest request) {
+    public String subscription(Model model) {
 
         boolean sessionExists = false;
 
@@ -130,7 +128,7 @@ public class HomeController {
 
 
     @GetMapping("/profile/{username}")
-    public String Profile(Model model, HttpServletRequest request, @PathVariable String username) {
+    public String Profile(Model model, @PathVariable String username) {
 
         model.addAttribute("title", "User Profile");
 
@@ -181,7 +179,7 @@ public class HomeController {
 
     // Creates a vew for the about page
     @GetMapping("/about")
-    public String about(Model model, HttpServletRequest request) {
+    public String about(Model model) {
 
         boolean sessionExists = false;
         sessionExists = authService.isAuthenticated();
