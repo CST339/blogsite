@@ -43,22 +43,21 @@ public class BlogPostController {
             return "redirect:/";
         }
 
+        String username = authService.getUsername();
+        model.addAttribute("username", username);
+
         return "blogPostForm";
     }
 
     @PostMapping("/savePost")
     public String savePost(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult, HttpServletRequest request) {
 
-        System.out.println("savePost");
 
         boolean sessionExists = false;
         String username = null;
 
         sessionExists = authService.isAuthenticated();
         username = authService.getUsername();
-
-         System.out.println("username: " + username);
-         System.out.println("blogPost.getAuthor(): " + blogPost.getAuthor());
 
         if(sessionExists){
 
@@ -102,6 +101,7 @@ public class BlogPostController {
             model.addAttribute("authenticated", true);
 
             username = authService.getUsername();
+            model.addAttribute("username", username);
 
             // Retrieve blog post data based on id.
             BlogPostModel blogPost = blogService.getBlogPostById(id);

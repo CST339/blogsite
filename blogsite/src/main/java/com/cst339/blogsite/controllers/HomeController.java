@@ -42,6 +42,8 @@ public class HomeController {
         boolean sessionExists = false;
 
         sessionExists = authService.isAuthenticated();
+        String username = authService.getUsername();
+        model.addAttribute("username", username);
 
         if (sessionExists) {
             model.addAttribute("authenticated", true); // Set authenticated equal to true
@@ -71,6 +73,8 @@ public class HomeController {
             String username = authService.getUsername();
             UserModel user = userService.getUser(username);
 
+            model.addAttribute("username", username);
+
             List<SubscriptionModel> subscriptions = subscriptionService.getSubscriptionsByUserId(user.getId());
 
             List<BlogPostModel> blogPosts = new ArrayList<BlogPostModel>();
@@ -81,8 +85,10 @@ public class HomeController {
                 List<BlogPostModel> blogs = blogService.findByAuthor(author);
                 blogPosts.addAll(blogs);
             }
-
-            model.addAttribute("blogposts", blogPosts); // Add list of blog post objects to model
+            if(blogPosts.isEmpty() == false){
+                 model.addAttribute("blogposts", blogPosts); // Add list of blog post objects to model
+            }
+           
 
         } else {
             model.addAttribute("authenticated", false); // Set authenticated equal to false
@@ -111,6 +117,9 @@ public class HomeController {
             UserModel user = userService.getUser(username); // Retrieve user
             model.addAttribute("user", user); // 
 
+            String signedInUser = authService.getUsername();
+            model.addAttribute("username", signedInUser);
+
             return "profile";
         }else{
             model.addAttribute("authenticated", false);
@@ -130,6 +139,10 @@ public class HomeController {
         if(sessionExists){
             model.addAttribute("title", "About"); // Modify title of webpage
             model.addAttribute("authenticated", true);
+
+            String signedInUser = authService.getUsername();
+            model.addAttribute("username", signedInUser);
+            
             return "about";
         }else{
             model.addAttribute("authenticated", false);

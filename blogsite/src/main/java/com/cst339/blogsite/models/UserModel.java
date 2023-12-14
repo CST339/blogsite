@@ -5,9 +5,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
 
-import java.util.List;
-import java.util.ArrayList;
-
 /**
  * This is the model for a User who registers on the site
  */
