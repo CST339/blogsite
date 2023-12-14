@@ -102,6 +102,16 @@ public class SubscriptionDataService implements DataAccessInterface<Subscription
 
     @Override
     public boolean delete(SubscriptionEntity subscriptionEntity){
+        String sql = String.format("DELETE FROM SUBSCRIPTIONS WHERE SUBSCRIBED_USER_ID ='%s' AND USER_ID='%s';", subscriptionEntity.getSubscribedUserId(), subscriptionEntity.getUserId());
+        
+        try{
+            jdbcTemplateObject.execute(sql);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
         return true;
     }
 

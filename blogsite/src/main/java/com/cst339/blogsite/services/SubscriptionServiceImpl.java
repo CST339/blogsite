@@ -26,7 +26,9 @@ public class SubscriptionServiceImpl implements SubscriptionSerivce{
         }
 
         for(SubscriptionEntity entity: subscriptionsEntities){
-            subscriptions.add(new SubscriptionModel(entity.getId(), entity.getSubscribedUserId(), entity.getUserId() ));
+            SubscriptionModel sub = new SubscriptionModel(entity.getSubscribedUserId(), entity.getUserId());
+            sub.setId(entity.getId());
+            subscriptions.add(sub);
         }
 
         return subscriptions;
@@ -34,13 +36,13 @@ public class SubscriptionServiceImpl implements SubscriptionSerivce{
 
 
     public boolean addSubscriptoin(SubscriptionModel subscription) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addSubscriptoin'");
+        boolean subscribed = subscriptionDataService.create(new SubscriptionEntity(null, subscription.getSubscribedUserId(), subscription.getUserId()));
+        return subscribed;
     }
 
     public boolean removeSubscription(SubscriptionModel subscription) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeSubscription'");
+        boolean unsubscribed = subscriptionDataService.delete(new SubscriptionEntity(null, subscription.getSubscribedUserId(), subscription.getUserId()));
+        return unsubscribed;
     }
     
 }

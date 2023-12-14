@@ -11,7 +11,18 @@
 
             <div class="col">
                 <img style="width:300px;" src="/images/pfp.png">
-                <button style="margin-top:40px;" id="sub-button" class="btn btn-primary">Subscribe</button>
+
+                <div th:if="${!owner}">
+                    <form method="POST" action="/doUnsubscribe">
+                        <input style="display:none;" th:value="${user.id}" name="userId" required id="userId" Read-only></input>
+                        <button th:if="${subscribed}" type="submit" style="margin-top:40px;" id="sub-button" class="btn btn-danger">Unsubscribe</button>
+                    </form>
+
+                    <form method="POST" action="/doSubscribe">
+                        <input style="display:none;" th:value="${user.id}" name="userId" required id="userId" Read-only></input>
+                        <button th:if="${!subscribed}" type="submit" style="margin-top:40px;" id="sub-button" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
             </div>   
 
             <div class="col">

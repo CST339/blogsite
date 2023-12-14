@@ -67,7 +67,7 @@ public class BlogServiceImpl implements BlogService {
 
         boolean result = blogDataService.create(blogPostEntity);
 
-        return result; // Return id if blog post is saved. id should be 0 if not able to save blog post
+        return result; // Return true if blog post is saved. id should be 0 if not able to save blog post
     }
 
     // Deletes blog from database

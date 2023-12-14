@@ -1,7 +1,10 @@
 package com.cst339.blogsite.models;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+
 public class SubscriptionModel {
 
+    // Unique ID for Subscription
     private Long id;
 
     // The user who is subscribed to someone
@@ -9,10 +12,10 @@ public class SubscriptionModel {
 
 
     // The somone they are subscribed to
+    @NotNull
     private Long userId;
 
-    public SubscriptionModel(Long id, Long subscribedUserId, Long userId){
-        this.id = id;
+    public SubscriptionModel(Long subscribedUserId, Long userId){
         this.subscribedUserId = subscribedUserId;
         this.userId = userId;
     }

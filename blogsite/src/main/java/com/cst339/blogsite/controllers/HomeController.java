@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+
 import java.util.List;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,9 @@ import com.cst339.blogsite.services.UserService;
 import com.cst339.blogsite.services.BlogService;
 import com.cst339.blogsite.services.AuthenticationService;
 import com.cst339.blogsite.services.SubscriptionSerivce;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 // Contains mappings for the "", and "/about" webpages
 @Controller
@@ -98,25 +103,71 @@ public class HomeController {
         return "subscriptions";
     }
 
+    @PostMapping("/doSubscribe")
+    public String subscribe(@Validated SubscriptionModel subscription) {
+        System.out.println("sub");
+
+        System.out.println("\n\nsubscription.getUserId(): " + subscription.getUserId());
+
+        int userId = userService.getUser(authService.getUsername()).getId();
+        subscription.setSubscribedUserId((long)userId);
+        boolean subscribed = subscriptionService.addSubscriptoin(subscription);
+
+        return "redirect:/profile/" + userService.getUserById(subscription.getUserId().intValue()).getUsername();
+    }
+
+    @PostMapping("/doUnsubscribe")
+    public String unsubscribe(SubscriptionModel subscription) {
+        System.out.println("unsub");
+
+        int userId = userService.getUser(authService.getUsername()).getId();
+        subscription.setSubscribedUserId((long)userId);
+        boolean unsubscribed = subscriptionService.removeSubscription(subscription);
+
+        return "redirect:/profile/" + userService.getUserById(subscription.getUserId().intValue()).getUsername();
+    }
+    
+
 
     @GetMapping("/profile/{username}")
     public String Profile(Model model, HttpServletRequest request, @PathVariable String username) {
 
         model.addAttribute("title", "User Profile");
 
-        System.out.println("\nAccessing user's profile. id: " + username);
-
         boolean sessionExists = false;
-
         sessionExists = authService.isAuthenticated();
         
         if (sessionExists) {
 
             model.addAttribute("authenticated", true);
 
-            UserModel user = userService.getUser(username); // Retrieve user
-            model.addAttribute("user", user); // 
+            UserModel user = userService.getUser(username); // Retrieve user (to view profile)
+            model.addAttribute("user", user); // Add user of profile to model
 
+            if(username.equals(authService.getUsername())){
+                System.out.println("OWNER TRUE");
+                model.addAttribute("owner", true);
+            }else{
+                 model.addAttribute("owner", false);
+                // Check if authenticated user is subscribed to user
+                boolean foundSub = false;
+                List<SubscriptionModel> subList = subscriptionService.getSubscriptionsByUserId(userService.getUser(authService.getUsername()).getId());
+                for(SubscriptionModel sub: subList){
+                    if(sub.getUserId().intValue() == user.getId()){
+                        foundSub = true;
+                        break;
+                    }
+                }
+
+                // Check if authenticated user is subscribed to user
+                if(foundSub == true){
+                    model.addAttribute("subscribed", true);
+                }else{
+                    model.addAttribute("subscribed", false);
+                }
+            }
+
+            // Used for navbar item
             String signedInUser = authService.getUsername();
             model.addAttribute("username", signedInUser);
 
