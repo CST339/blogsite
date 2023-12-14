@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cst339.blogsite.models.BlogPost;
+import com.cst339.blogsite.models.BlogPostModel;
 import com.cst339.blogsite.services.BlogService;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,7 +26,7 @@ public class BlogsRestAPI {
     public ResponseEntity<?> getAllBlogs(){
         try{
 
-            List<BlogPost> blogPosts = service.findAllBlogPosts();
+            List<BlogPostModel> blogPosts = service.findAllBlogPosts();
             if(blogPosts.isEmpty()){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }else{
@@ -53,7 +53,7 @@ public class BlogsRestAPI {
 
 
         try{
-            BlogPost blogPost = service.getBlogPostById(id);
+            BlogPostModel blogPost = service.getBlogPostById(id);
             if(blogPost == null){
                 return new ResponseEntity<>("Error: Result Not Found", HttpStatus.OK);
             }else{

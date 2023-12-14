@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
  * This is the model for a blog post that captures the title, date, author, and
  * actual content of the blog post
  */
-public class BlogPost {
+public class BlogPostModel {
 
     private Integer id;
 
@@ -19,7 +19,7 @@ public class BlogPost {
     @NotNull
     private String content;
 
-    public BlogPost(Integer id, String title, String date, String author, String content) {
+    public BlogPostModel(Integer id, String title, String date, String author, String content) {
         this.id = id;
         this.title = title;
         this.date = date;

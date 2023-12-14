@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.validation.BindingResult;
 import javax.validation.Valid;
 import java.time.LocalDate;
-import com.cst339.blogsite.models.BlogPost;
+import com.cst339.blogsite.models.BlogPostModel;
 import com.cst339.blogsite.services.BlogService;
 import com.cst339.blogsite.services.AuthenticationService;
 
@@ -47,7 +47,7 @@ public class BlogPostController {
     }
 
     @PostMapping("/savePost")
-    public String savePost(Model model, @Valid BlogPost blogPost, BindingResult bindingResult, HttpServletRequest request) {
+    public String savePost(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult, HttpServletRequest request) {
 
         System.out.println("savePost");
 
@@ -104,7 +104,7 @@ public class BlogPostController {
             username = authService.getUsername();
 
             // Retrieve blog post data based on id.
-            BlogPost blogPost = blogService.getBlogPostById(id);
+            BlogPostModel blogPost = blogService.getBlogPostById(id);
             model.addAttribute("blogPost", blogPost); // Add for content on webpage
 
             System.out.println("Session val: " +  username);
@@ -126,7 +126,7 @@ public class BlogPostController {
     }
 
     @PostMapping("/updatePost")
-    public String updateBlog(Model model, @Valid BlogPost blogPost, BindingResult bindingResult, HttpServletRequest request){
+    public String updateBlog(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult, HttpServletRequest request){
 
         boolean sessionExists = false;
         String username = null;
@@ -134,7 +134,7 @@ public class BlogPostController {
         sessionExists = authService.isAuthenticated();
         username = authService.getUsername();
 
-        BlogPost blog = blogService.getBlogPostById(blogPost.getId());
+        BlogPostModel blog = blogService.getBlogPostById(blogPost.getId());
         if(sessionExists && username.equals(blog.getAuthor()) ){
 
             model.addAttribute("authenticated", true);
@@ -160,7 +160,7 @@ public class BlogPostController {
 
 
     @PostMapping("/deletePost")
-    public String deleteBlog(Model model, @Valid BlogPost blogPost, BindingResult bindingResult, HttpServletRequest request){
+    public String deleteBlog(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult, HttpServletRequest request){
 
         boolean sessionExists = false;
         String username = null;
@@ -168,7 +168,7 @@ public class BlogPostController {
         sessionExists = authService.isAuthenticated();
         username = authService.getUsername();
 
-        BlogPost blog = blogService.getBlogPostById(blogPost.getId());
+        BlogPostModel blog = blogService.getBlogPostById(blogPost.getId());
         if(sessionExists && username.equals(blog.getAuthor()) ){
 
             model.addAttribute("authenticated", true);

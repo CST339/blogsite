@@ -24,6 +24,21 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 
     @Autowired
     private UserDataService service;
+
+    public UserModel getUserById(int id){
+        UserEntity userEntity = service.findById(id);
+        
+        UserModel user = new UserModel(userEntity.getUserName(), 
+                             userEntity.getPassword(), 
+                             userEntity.getFirstName(), 
+                             userEntity.getLastName(), 
+                             userEntity.getPhoneNumber(), 
+                             userEntity.getEmailAddress());
+
+        user.setId(userEntity.getId().intValue());
+
+        return user;
+    }
     
     public UserModel getUser(String username){
 
@@ -35,6 +50,8 @@ public class UserServiceImpl implements UserService, UserDetailsService{
                              userEntity.getLastName(), 
                              userEntity.getPhoneNumber(), 
                              userEntity.getEmailAddress());
+
+        user.setId(userEntity.getId().intValue());
 
         return user;
 

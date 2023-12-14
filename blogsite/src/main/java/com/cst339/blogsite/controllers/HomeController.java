@@ -7,13 +7,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import java.util.List;
-import javax.servlet.http.Cookie;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
-import com.cst339.blogsite.models.BlogPost;
+import com.cst339.blogsite.models.BlogPostModel;
 import com.cst339.blogsite.models.UserModel;
+import com.cst339.blogsite.models.SubscriptionModel;
 import com.cst339.blogsite.services.UserService;
 import com.cst339.blogsite.services.BlogService;
 import com.cst339.blogsite.services.AuthenticationService;
+import com.cst339.blogsite.services.SubscriptionSerivce;
 
 // Contains mappings for the "", and "/about" webpages
 @Controller
@@ -30,12 +32,12 @@ public class HomeController {
     @Autowired
     private AuthenticationService authService;
 
+    @Autowired
+    private SubscriptionSerivce subscriptionService;
+
     // Creates view for the Home page (index page)
     @GetMapping("")
     public String index(Model model, HttpServletRequest request) {
-
-        // Get the request's cookies
-        //Cookie[] cookies = request.getCookies();
 
         boolean sessionExists = false;
 
@@ -44,7 +46,7 @@ public class HomeController {
         if (sessionExists) {
             model.addAttribute("authenticated", true); // Set authenticated equal to true
 
-            List<BlogPost> blogposts = blogService.findAllBlogPosts(); // Create list of blogposts from returned value of serivce
+            List<BlogPostModel> blogposts = blogService.findAllBlogPosts(); // Create list of blogposts from returned value of serivce
             model.addAttribute("blogposts", blogposts); // Add list of blog post objects to model
 
         } else {
@@ -56,15 +58,47 @@ public class HomeController {
     }
 
 
+    @GetMapping("/subscriptions")
+    public String subscription(Model model, HttpServletRequest request) {
+
+        boolean sessionExists = false;
+
+        sessionExists = authService.isAuthenticated();
+
+        if (sessionExists) {
+            model.addAttribute("authenticated", true); // Set authenticated equal to true
+
+            String username = authService.getUsername();
+            UserModel user = userService.getUser(username);
+
+            List<SubscriptionModel> subscriptions = subscriptionService.getSubscriptionsByUserId(user.getId());
+
+            List<BlogPostModel> blogPosts = new ArrayList<BlogPostModel>();
+
+            for(SubscriptionModel sub: subscriptions){
+                
+                String author = userService.getUserById(sub.getUserId().intValue()).getUsername();
+                List<BlogPostModel> blogs = blogService.findByAuthor(author);
+                blogPosts.addAll(blogs);
+            }
+
+            model.addAttribute("blogposts", blogPosts); // Add list of blog post objects to model
+
+        } else {
+            model.addAttribute("authenticated", false); // Set authenticated equal to false
+        }
+
+        model.addAttribute("title", "DevDiscourse"); // Modify title of webpage
+        return "subscriptions";
+    }
+
+
     @GetMapping("/profile/{username}")
     public String Profile(Model model, HttpServletRequest request, @PathVariable String username) {
 
         model.addAttribute("title", "User Profile");
 
         System.out.println("\nAccessing user's profile. id: " + username);
-
-        // Get the request's cookies
-        Cookie[] cookies = request.getCookies();
 
         boolean sessionExists = false;
 

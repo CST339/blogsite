@@ -69,6 +69,28 @@ public class BlogDataService implements DataAccessInterface<BlogPostEntity>{
         return null;
     }
 
+    // Custom Query method
+    public List<BlogPostEntity> findByAuthor(String author){
+
+        String sql = String.format("SELECT * FROM BLOGPOSTS WHERE AUTHOR = '%s'", author);
+        
+        try{
+            List<BlogPostEntity> blogs = jdbcTemplateObject.query(sql, blogRowMapper);
+
+            // Get the first item if the list is present
+            if(blogs.isEmpty() != true){
+                return blogs;
+            }else{
+                System.out.println("Blogs is empty");
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public List<BlogPostEntity> findAll(){
          
         List<BlogPostEntity> blogs = new ArrayList<BlogPostEntity>();

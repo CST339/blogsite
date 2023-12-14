@@ -15,6 +15,8 @@ public class UserModel {
 
     // User ID
     // Not set until service generates a new ID
+    Integer id;
+    
 
     // Username
     @NotNull(message = "Username is required")
@@ -51,21 +53,26 @@ public class UserModel {
 
     }
 
-    public UserModel( String username, String password, String firstName, String lastName, String phoneNumber,
+    public UserModel(String username, String password, String firstName, String lastName, String phoneNumber,
             String emailAddress) {
-
+                
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
-
-        // Initialize
-        // this.subscriptions = new ArrayList<String>();
     }
 
     // getters and setters
+
+    public Integer getId(){
+        return this.id;
+    }
+
+    public void setId(Integer id){
+        this.id = id;
+    }
 
     public String getUsername() {
         return this.username;

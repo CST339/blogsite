@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.cst339.blogsite.data.mapper.UserRowMapper;
 import com.cst339.blogsite.entity.UserEntity;
-import com.cst339.blogsite.data.repository.UsersRepository;;
+import com.cst339.blogsite.data.repository.UsersRepository;
 
 @Service
 public class UserDataService implements DataAccessInterface<UserEntity>{

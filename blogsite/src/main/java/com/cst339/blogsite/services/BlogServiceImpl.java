@@ -3,7 +3,7 @@ package com.cst339.blogsite.services;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cst339.blogsite.data.BlogDataService;
-import com.cst339.blogsite.models.BlogPost;
+import com.cst339.blogsite.models.BlogPostModel;
 import com.cst339.blogsite.entity.BlogPostEntity;
 
 import java.util.ArrayList;
@@ -16,26 +16,40 @@ public class BlogServiceImpl implements BlogService {
     private BlogDataService blogDataService;
 
 
-    public List<BlogPost> findAllBlogPosts(){
+    public List<BlogPostModel> findAllBlogPosts(){
 
         List<BlogPostEntity> blogPostEntities = blogDataService.findAll();
 
-        List<BlogPost> blogPosts = new ArrayList<BlogPost>();
+        List<BlogPostModel> blogPosts = new ArrayList<BlogPostModel>();
 
         for(BlogPostEntity entity: blogPostEntities){
-            blogPosts.add(new BlogPost(entity.getId().intValue(), entity.getTitle(), entity.getDate(), entity.getAuthor(), entity.getContent()));
+            blogPosts.add(new BlogPostModel(entity.getId().intValue(), entity.getTitle(), entity.getDate(), entity.getAuthor(), entity.getContent()));
         }
         
         return blogPosts;
 
     }
 
-    public BlogPost getBlogPostById(int id){
+    public List<BlogPostModel> findByAuthor(String author){
+
+        List<BlogPostEntity> blogPostEntities = blogDataService.findByAuthor(author);
+
+        List<BlogPostModel> blogPosts = new ArrayList<BlogPostModel>();
+
+        for(BlogPostEntity entity: blogPostEntities){
+            blogPosts.add(new BlogPostModel(entity.getId().intValue(), entity.getTitle(), entity.getDate(), entity.getAuthor(), entity.getContent()));
+        }
+        
+        return blogPosts;
+    }
+
+
+    public BlogPostModel getBlogPostById(int id){
         
         BlogPostEntity blogEntity = blogDataService.findById(id);
 
         if(blogEntity != null){
-            BlogPost blogPost = new BlogPost(id, blogEntity.getTitle(), blogEntity.getDate(), blogEntity.getAuthor(), blogEntity.getContent());
+            BlogPostModel blogPost = new BlogPostModel(id, blogEntity.getTitle(), blogEntity.getDate(), blogEntity.getAuthor(), blogEntity.getContent());
 
             return blogPost;
         
@@ -45,7 +59,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     // Saves blog to database
-    public boolean saveBlog(BlogPost post) {
+    public boolean saveBlog(BlogPostModel post) {
 
         // Add blogpost object to database
 
@@ -57,7 +71,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     // Deletes blog from database
-    public boolean deleteBlog(BlogPost post) {
+    public boolean deleteBlog(BlogPostModel post) {
 
         // cast Id to LONG
         Long longId = (long) post.getId();
@@ -69,7 +83,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     // Deletes blog from database
-    public boolean updateBlog(BlogPost post) {
+    public boolean updateBlog(BlogPostModel post) {
 
         // cast Id to LONG
         Long longId = (long) post.getId();
