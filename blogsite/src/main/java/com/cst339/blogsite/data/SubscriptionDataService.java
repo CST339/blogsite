@@ -2,7 +2,7 @@ package com.cst339.blogsite.data;
 
 import com.cst339.blogsite.entity.SubscriptionEntity;
 import com.cst339.blogsite.data.mapper.SubscriptionRowMapper;
-import com.cst339.blogsite.data.repository.SubscriptionsRepository;
+import com.cst339.blogsite.data.repository.SubscriptionRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,13 +15,13 @@ import org.springframework.stereotype.Service;
 public class SubscriptionDataService implements DataAccessInterface<SubscriptionEntity>{
 
     @Autowired
-    private SubscriptionsRepository subscriptionsRepository;
+    private SubscriptionRepository subscriptionsRepository;
     private SubscriptionRowMapper subscriptionRowMapper = new SubscriptionRowMapper();
     @SuppressWarnings("unused")
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;
 
-    public SubscriptionDataService(SubscriptionsRepository subscriptionsRepository, DataSource dataSource){
+    public SubscriptionDataService(SubscriptionRepository subscriptionsRepository, DataSource dataSource){
         this.subscriptionsRepository = subscriptionsRepository;
         this.dataSource = dataSource;
         this.jdbcTemplateObject = new JdbcTemplate(dataSource);

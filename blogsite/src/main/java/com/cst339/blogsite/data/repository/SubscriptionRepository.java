@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.cst339.blogsite.entity.SubscriptionEntity;
 
 @Repository
-public interface SubscriptionsRepository extends CrudRepository<SubscriptionEntity, Long>{
+public interface SubscriptionRepository extends CrudRepository<SubscriptionEntity, Long>{
     
 }
