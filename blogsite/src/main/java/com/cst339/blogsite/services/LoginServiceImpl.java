@@ -5,19 +5,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.cst339.blogsite.data.UserDataService;
 import com.cst339.blogsite.entity.UserEntity;
 
+/**
+ * Default for authentication but replaced by Security Framework
+ */
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private UserDataService service;
 
-    // Verifies credentials
+
+    /**
+     * Used to verify login credentials
+     * @param username The username
+     * @param password The password
+     */
     public boolean verifyLogin(String username, String password) {
 
-        // Check that the username and password match with the database
         UserEntity user = service.findByUsername(username);
         System.out.println(user);
 
-        // TODO - Add encryption step for entered password to compare for encrypted db password
        if(user != null && (user.getPassword().equals(password)) ){
             return true;        
        }

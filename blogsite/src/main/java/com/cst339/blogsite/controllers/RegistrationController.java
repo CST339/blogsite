@@ -11,13 +11,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.validation.Valid;
 
+/**
+ * Controller to add user 
+ */
 @Controller
 public class RegistrationController {
 
     @Autowired
     private RegistrationService registrationService;
 
-    // Creates view for registration page
+    /**
+     * Shows registration page
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/register")
     public String registerForm(Model model, UserModel user) {
         model.addAttribute("user", new UserModel());
@@ -27,7 +35,13 @@ public class RegistrationController {
         return "register";
     }
 
-    // Registers user and returns them to the registration page or the home page
+    /**
+     * Registers user and returns them to the registration page or the home page
+     * @param user
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping("/doRegister")
     public String registerSubmit(@Valid UserModel user, BindingResult bindingResult, Model model) {
 

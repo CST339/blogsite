@@ -10,12 +10,20 @@ import com.cst339.blogsite.models.SubscriptionModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Subscription service to return, add, and remove subscription items in database
+ */
 @Service
 public class SubscriptionServiceImpl implements SubscriptionSerivce{
 
     @Autowired
     SubscriptionDataService subscriptionDataService;
 
+    /**
+     * Get subscription by ID
+     * 
+     * @param id Used to return id
+     */
     public List<SubscriptionModel> getSubscriptionsByUserId(int id) {
         List<SubscriptionEntity> subscriptionsEntities = subscriptionDataService.findByUserId(id);
 
@@ -35,11 +43,19 @@ public class SubscriptionServiceImpl implements SubscriptionSerivce{
     }
 
 
+    /**
+     * Used to add a new subscription
+     * @param subscription The subscription object
+     */
     public boolean addSubscriptoin(SubscriptionModel subscription) {
         boolean subscribed = subscriptionDataService.create(new SubscriptionEntity(null, subscription.getSubscribedUserId(), subscription.getUserId()));
         return subscribed;
     }
 
+    /**
+     * Used to remove an existing subscription
+     * @param subscription The subscription object
+     */
     public boolean removeSubscription(SubscriptionModel subscription) {
         boolean unsubscribed = subscriptionDataService.delete(new SubscriptionEntity(null, subscription.getSubscribedUserId(), subscription.getUserId()));
         return unsubscribed;

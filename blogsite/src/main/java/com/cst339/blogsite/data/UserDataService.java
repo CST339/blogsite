@@ -11,6 +11,9 @@ import com.cst339.blogsite.data.mapper.UserRowMapper;
 import com.cst339.blogsite.entity.UserEntity;
 import com.cst339.blogsite.data.repository.UsersRepository;
 
+/**
+ * User data service to edit add and remove Users from database
+ */
 @Service
 public class UserDataService implements DataAccessInterface<UserEntity>{
     
@@ -21,12 +24,22 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;
 
+    /**
+     * Constructor for User Data Service
+     * @param usersRepository repository of user
+     * @param dataSource Source of data for user
+     */
     public UserDataService(UsersRepository usersRepository, DataSource dataSource){
         this.usersRepository = usersRepository;
         this.dataSource = dataSource;
         this.jdbcTemplateObject = new JdbcTemplate(dataSource);
     }
 
+
+    /**
+     * Return user based on ID
+     * @param id id of user to return
+     */
     public UserEntity findById(int id){
 
         try{
@@ -46,7 +59,11 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
         return null;
     }
 
-    // Custom Query method for authentication
+   /**
+    * Return user based on username
+    * @param username username of user
+    * @return
+    */
     public UserEntity findByUsername(String username){
 
         String sql = String.format("SELECT * FROM USERS WHERE USERNAME = '%s'", username);
@@ -69,6 +86,9 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
         return null;
     }
 
+    /**
+     * Return a list of all users
+     */
     public List<UserEntity> findAll(){
          
         List<UserEntity> users = new ArrayList<UserEntity>();
@@ -86,6 +106,10 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
          return users;
     }
 
+    /**
+     * Create a user
+     * @param user user to create in database
+     */
     public boolean create(UserEntity user){
         try{
             this.usersRepository.save(user);
@@ -97,10 +121,18 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
         return true;
     }
 
+    /**
+     * Update user 
+     * @param user user to update
+     */
      public boolean update(UserEntity user){
         return true;
     }   
 
+    /**
+     * Delete user
+     * @param user user to delete
+     */
     @Override
     public boolean delete(UserEntity user){
         return true;

@@ -50,6 +50,15 @@ public class UserModel {
 
     }
 
+    /**
+     * Constructor for User Model
+     * @param username username of user
+     * @param password password for user
+     * @param firstName first name of user
+     * @param lastName last name of user
+     * @param phoneNumber phone number of user
+     * @param emailAddress the email address of the user
+     */
     public UserModel(String username, String password, String firstName, String lastName, String phoneNumber,
             String emailAddress) {
                 
@@ -63,68 +72,116 @@ public class UserModel {
 
     // getters and setters
 
+
+    /**
+     * Return id of user
+     * @return
+     */
     public Integer getId(){
         return this.id;
     }
 
+    /**
+     * Set id of user
+     * @param id
+     */
     public void setId(Integer id){
         this.id = id;
     }
 
+    /**
+     * return username of user
+     * @return
+     */
     public String getUsername() {
         return this.username;
     }
 
+    /**
+     * Return password of user
+     * @return
+     */
     public String getPassword() {
         return this.password;
     }
 
+    /**
+     * Return first name of user
+     * @return
+     */
     public String getFirstName() {
         return this.firstName;
     }
 
+    /**
+     * Return last name of user
+     * @return
+     */
     public String getLastName() {
         return this.lastName;
     }
 
+    /**
+     * Return phone number of user
+     * @return
+     */
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
 
+    /**
+     * Return email address of user
+     * @return
+     */
     public String getEmailAddress() {
         return this.emailAddress;
     }
 
+    /**
+     * Set password of user
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * set username of user
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Set first name of user
+     * @param firstName
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Set last name of user
+     * @param lastName
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Set phone number of user
+     * @param phoneNumber
+     */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * Set email address of user
+     * @param emailAddress
+     */
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-
-    // public List<String> getSubscriptions(){
-    //     return this.subscriptions;
-    // }
-
-    // public void setSubscriptions(List<String> subscriptions){
-    //     this.subscriptions = subscriptions;
-    // }
-
 }

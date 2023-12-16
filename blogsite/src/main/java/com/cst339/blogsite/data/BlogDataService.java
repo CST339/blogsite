@@ -11,6 +11,9 @@ import com.cst339.blogsite.data.mapper.BlogRowMapper;
 import com.cst339.blogsite.entity.BlogPostEntity;
 import com.cst339.blogsite.data.repository.BlogPostRepository;
 
+/**
+ * Service for adding, removing, and editing blog posts
+ */
 @Service
 public class BlogDataService implements DataAccessInterface<BlogPostEntity>{
     

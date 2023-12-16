@@ -19,12 +19,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Used to return, add, and remove users
+ */
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService{
 
     @Autowired
     private UserDataService service;
 
+    /**
+     * Return entire user object based on id
+     * @param id id of user to return
+     */
     public UserModel getUserById(int id){
         UserEntity userEntity = service.findById(id);
         
@@ -40,6 +47,10 @@ public class UserServiceImpl implements UserService, UserDetailsService{
         return user;
     }
     
+    /**
+     * used to return user based on username
+     * @param username username of user to return
+     */
     public UserModel getUser(String username){
 
         UserEntity userEntity = service.findByUsername(username);
@@ -57,6 +68,11 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 
     }
 
+    /**
+     * Used for authentication of user
+     * 
+     * @param username username object to authenticate
+     */
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
 
         UserEntity user = service.findByUsername(username);

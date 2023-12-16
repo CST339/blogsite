@@ -9,13 +9,18 @@ import com.cst339.blogsite.entity.BlogPostEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class is used to communicate to help pass along and return blog post data to the services that operate the database
+ */
 public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private BlogDataService blogDataService;
 
-
+    /**
+     * Used to return all blog posts
+     * @return
+     */
     public List<BlogPostModel> findAllBlogPosts(){
 
         List<BlogPostEntity> blogPostEntities = blogDataService.findAll();
@@ -30,6 +35,11 @@ public class BlogServiceImpl implements BlogService {
 
     }
 
+    /**
+     * Used to return blogpost based on author name
+     * @param author
+     * @return
+     */
     public List<BlogPostModel> findByAuthor(String author){
 
         List<BlogPostEntity> blogPostEntities = blogDataService.findByAuthor(author);
@@ -43,7 +53,10 @@ public class BlogServiceImpl implements BlogService {
         return blogPosts;
     }
 
-
+    /**
+     * Used to get blog post based on passed ID
+     * @param id The Identififer for the blog post
+     */
     public BlogPostModel getBlogPostById(int id){
         
         BlogPostEntity blogEntity = blogDataService.findById(id);
@@ -58,7 +71,12 @@ public class BlogServiceImpl implements BlogService {
         }
     }
 
-    // Saves blog to database
+    /**
+     * Used to save created blog into the database
+     *  
+     * @param post
+     * @return
+     */
     public boolean saveBlog(BlogPostModel post) {
 
         // Add blogpost object to database
@@ -70,7 +88,13 @@ public class BlogServiceImpl implements BlogService {
         return result; // Return true if blog post is saved. id should be 0 if not able to save blog post
     }
 
-    // Deletes blog from database
+    /**
+     * 
+     * Used to delete blogs
+     * 
+     * @param post The blogpost to delete
+     * @return
+     */
     public boolean deleteBlog(BlogPostModel post) {
 
         // cast Id to LONG
@@ -82,7 +106,11 @@ public class BlogServiceImpl implements BlogService {
         return result; // Return true if deleted blog post
     }
 
-    // Deletes blog from database
+    /**
+     * Used to update a specific blog post
+     * @param post The blog post to update
+     * @return
+     */
     public boolean updateBlog(BlogPostModel post) {
 
         // cast Id to LONG

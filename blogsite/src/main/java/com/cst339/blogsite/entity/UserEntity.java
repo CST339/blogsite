@@ -4,6 +4,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+/**
+ * Entity used for Database for USERS table
+ */
 @Table(name="USERS")
 public class UserEntity {
     

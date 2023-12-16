@@ -20,7 +20,9 @@ import com.cst339.blogsite.services.SubscriptionSerivce;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
-// Contains mappings for the "", and "/about" webpages
+/**
+ * Controller for main pages (Blog post display, profiles, and subscriptions)
+ */
 @Controller
 @RequestMapping("")
 public class HomeController {
@@ -38,7 +40,11 @@ public class HomeController {
     @Autowired
     private SubscriptionSerivce subscriptionService;
 
-    // Creates view for the Home page (index page)
+    /**
+     * Show all blog posts
+     * @param model
+     * @return
+     */
     @GetMapping("")
     public String index(Model model) {
 
@@ -63,6 +69,11 @@ public class HomeController {
     }
 
 
+    /**
+     * Show subscriptions
+     * @param model
+     * @return
+     */
     @GetMapping("/subscriptions")
     public String subscription(Model model) {
 
@@ -101,6 +112,11 @@ public class HomeController {
         return "subscriptions";
     }
 
+    /**
+     * Subscribe user
+     * @param subscription
+     * @return
+     */
     @PostMapping("/doSubscribe")
     public String subscribe(@Validated SubscriptionModel subscription) {
         System.out.println("sub");
@@ -114,6 +130,11 @@ public class HomeController {
         return "redirect:/profile/" + userService.getUserById(subscription.getUserId().intValue()).getUsername();
     }
 
+    /**
+     * Unsubscribe user
+     * @param subscription
+     * @return
+     */
     @PostMapping("/doUnsubscribe")
     public String unsubscribe(SubscriptionModel subscription) {
         System.out.println("unsub");
@@ -127,6 +148,12 @@ public class HomeController {
     
 
 
+    /**
+     * View profile
+     * @param model
+     * @param username
+     * @return
+     */
     @GetMapping("/profile/{username}")
     public String Profile(Model model, @PathVariable String username) {
 
@@ -177,7 +204,11 @@ public class HomeController {
         return "redirect:/";
     }
 
-    // Creates a vew for the about page
+   /**
+    * About page
+    * @param model
+    * @return
+    */
     @GetMapping("/about")
     public String about(Model model) {
 

@@ -10,6 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.cst339.blogsite.services.UserServiceImpl;
 
+
+/**
+ * This secures the site by requiring authentication through the database
+ */
 @Configuration
 @EnableWebSecurity
 @SuppressWarnings("deprecation")
@@ -47,6 +51,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .logoutSuccessUrl("/login");
     }
 
+    /**
+     * @param auth Authentication manager
+     */
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception{
 

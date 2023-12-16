@@ -7,7 +7,9 @@ import com.cst339.blogsite.models.UserModel;
 import org.springframework.ui.Model;
 import com.cst339.blogsite.services.AuthenticationService;
 
-
+/**
+ * Controller used for authentication
+ */
 @Controller
 public class LoginController {
 
@@ -17,7 +19,12 @@ public class LoginController {
     @Autowired
     private AuthenticationService authService;
 
-    // Creates view for login page
+    /**
+     * Show login page
+     * @param model
+     * @param user
+     * @return
+     */
     @GetMapping("/login")
     public String login(Model model, UserModel user) {
         model.addAttribute("user", new UserModel());
@@ -34,7 +41,11 @@ public class LoginController {
         return "login"; // Return login template
     }
 
-    // removes session and returns user to home page
+    /**
+     * Mapped to log out user via Security Framework
+     * @param model
+     * @return
+     */
     @GetMapping("/logout")
     public String logout(Model model) {
 

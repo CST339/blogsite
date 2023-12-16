@@ -5,9 +5,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * Service used for checking authentication of current user
+ */
 @Service
 public class AuthenticationService {
     
+    /**
+     * Used to check if the user is logged in
+     * @return
+     */
     public boolean isAuthenticated(){
 
         // Access the authenticated user details
@@ -21,6 +28,10 @@ public class AuthenticationService {
         return false;
     }
 
+    /**
+     * Used to get the username of the logged in user
+     * @return
+     */
     public String getUsername(){
 
         // Access the authenticated user details

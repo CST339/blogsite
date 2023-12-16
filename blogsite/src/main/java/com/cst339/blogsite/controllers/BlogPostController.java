@@ -15,7 +15,7 @@ import com.cst339.blogsite.services.BlogService;
 import com.cst339.blogsite.services.AuthenticationService;
 
 /*
- * Used to create posts
+ * Controller for blog posts
  */
 @Controller
 public class BlogPostController {
@@ -26,6 +26,11 @@ public class BlogPostController {
     @Autowired
     AuthenticationService authService;
 
+    /**
+     * Method to create post
+     * @param model
+     * @return
+     */
     @GetMapping("/createPost")
     public String createPost(Model model) {
 
@@ -48,6 +53,13 @@ public class BlogPostController {
         return "blogPostForm";
     }
 
+    /**
+     * Method to save post
+     * @param model
+     * @param blogPost
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/savePost")
     public String savePost(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult) {
 
@@ -76,12 +88,16 @@ public class BlogPostController {
                 return "redirect:/createPost";
             }
         }
-
-        // TODO: Eventually change this to view post just created "/blog/<id>"
         return "redirect:/";
 
     }
 
+    /**
+     * View Blog post 
+     * @param model
+     * @param id
+     * @return
+     */
     @GetMapping("/blog/{id}")
     public String blog(Model model, @PathVariable int id) {
 
@@ -124,6 +140,13 @@ public class BlogPostController {
         return "redirect:/";
     }
 
+    /**
+     * Update blog post
+     * @param model
+     * @param blogPost
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/updatePost")
     public String updateBlog(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult){
 
@@ -157,6 +180,13 @@ public class BlogPostController {
     }
 
 
+    /**
+     * Remove blog post
+     * @param model
+     * @param blogPost
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/deletePost")
     public String deleteBlog(Model model, @Valid BlogPostModel blogPost, BindingResult bindingResult){
 
