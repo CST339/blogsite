@@ -13,7 +13,9 @@ import com.cst339.blogsite.models.BlogPostModel;
 import com.cst339.blogsite.services.BlogService;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+/**
+ * Controller for API to return blog posts
+ */
 @RestController
 @RequestMapping("/service")
 public class BlogsRestAPI {
@@ -21,7 +23,10 @@ public class BlogsRestAPI {
     @Autowired
     BlogService service;
     
-    // Method to get all blog posts
+    /**
+     *  Method to get all blog posts
+     * @return
+     */
     @GetMapping(path="/blogposts")
     public ResponseEntity<?> getAllBlogs(){
         try{
@@ -39,7 +44,11 @@ public class BlogsRestAPI {
         }
     }
 
-    // Method to get one blog post (based on ID)
+    /**
+     * Method to get one blog post (based on ID)
+     * @param param
+     * @return
+     */
     @GetMapping(path="/blogpost")
     public ResponseEntity<?> getBlogPost(@RequestParam String param){
 

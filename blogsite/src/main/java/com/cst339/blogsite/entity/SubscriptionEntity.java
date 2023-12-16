@@ -4,6 +4,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+/**
+ * Entity used by database for Subscriptions table
+ */
 @Table(name="SUBSCRIPTIONS")
 public class SubscriptionEntity {
 

@@ -4,6 +4,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+/**
+ * Entity used by database for BLOGPOSTS table
+ */
 @Table(name="BLOGPOSTS")
 public class BlogPostEntity {
     

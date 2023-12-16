@@ -14,7 +14,7 @@ import com.cst339.blogsite.models.BlogPostModel;
 import com.cst339.blogsite.services.BlogService;
 import com.cst339.blogsite.services.AuthenticationService;
 
-/*
+/**
  * Controller for blog posts
  */
 @Controller
