@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .httpBasic()
                 .and()
                 .authorizeRequests()
+                .antMatchers("/_ah/start").permitAll()
                 .antMatchers("/service/**").authenticated()
                 .and()
             .authorizeRequests()
